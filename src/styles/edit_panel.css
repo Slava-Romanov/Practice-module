@@ -1,0 +1,45 @@
+@keyframes visibleAnimation {
+    from { transform: translate(-50%, 100%); }
+    to { transform: translate(-50%, 0%); }
+}
+
+.edit_panel {
+    background: #232B3F;
+    border-radius: 20px 20px 0px 0px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 675px;
+    height: 55px;
+
+    animation: visibleAnimation .5s 1 ease-in-out;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.edit_buttons {
+
+}
+
+@media (max-width: 690px) {
+    .edit_panel {
+        width: 310px;
+    }
+
+    .red_btn {
+        font-size: 0px;
+    }
+
+    .grey_btn {
+        font-size: 0px;
+    }
+
+    .red_btn img, .grey_btn img {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

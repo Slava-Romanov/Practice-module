@@ -1,0 +1,33 @@
+table {
+    margin-top: 25px;
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+th {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 13px;
+    text-align: center;
+    background-color: #F0F0F0;
+    color: #323232;
+}
+
+td {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 13px;
+    text-align: center;
+    color: #323232;
+}
+
+td .edit {
+    background: black;
+    mask-size: cover;
+    mask: url(../images/penIcon.svg);
+}
+
+tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
