@@ -40,13 +40,15 @@ const top_block = <div className="top_block">
 
 ReactDOM.render(top_block, document.getElementById('top_block'));
 
-const edit_panel = <div className="edit_panel">
-    <button className="grey_btn"><img src={closeIcon}/> Закрыть </button>
-    <button className="grey_btn"><img src={upIcon}/> Переместить выше </button>
-    <button className="grey_btn"><img src={downIcon}/> Переместить ниже </button>
-    <button className="grey_btn"><img src={penIcon}/> Редактировать </button>
-    <button className="red_btn"><img src={trashIcon}/> Удалить </button>
-    </div>;
+const edit_panel =
+    <div className="fixed_panel">
+    <div className="edit_panel">
+    <button className="grey_btn"> <img src={closeIcon}/>Снять выделение </button>
+        <button className="grey_btn"><img src={upIcon}/> Переместить выше </button>
+        <button className="grey_btn"><img src={downIcon}/> Переместить ниже </button>
+        <button className="grey_btn"><img src={penIcon}/> Редактировать </button>
+        <button className="red_btn"><img src={trashIcon}/> Удалить </button>
+    </div> </div>;
 
 ReactDOM.render(edit_panel, document.getElementById('edit_panel'));
 
@@ -54,7 +56,10 @@ ReactDOM.render(edit_panel, document.getElementById('edit_panel'));
 const checkbox = h(
     'th',
     { },
-    ' '
+    h(
+        'input',
+        { type: 'checkbox', name: "option2"},//, disabled : "disabled", checked : "checked"
+        ' ')
 );
 
 const num = h(
@@ -101,7 +106,7 @@ for (let i = 0; i < data.modules.length; i++) {
         { },
         h(
             'input',
-            { type: 'checkbox', name: "option2"},
+            { type: 'checkbox', name: "option2"},//, disabled : "disabled", checked : "checked"
             ' ')
     );
 
@@ -154,6 +159,7 @@ const table = h(
     { },
     all_table
 );
+
 
 ReactDOM.render(
     table,
