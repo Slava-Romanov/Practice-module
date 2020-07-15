@@ -2,7 +2,7 @@ table {
     margin-top: 25px;
     width: 100%;
     border-collapse: collapse;
-
+    table-layout:fixed;
 }
 
 th {
@@ -10,7 +10,7 @@ th {
     font-weight: 600;
     padding: 13px;
     text-align: center;
-    background-color: #F0F0F0;
+    background-color: #f2f2f2;
     color: #323232;
 }
 
@@ -28,6 +28,128 @@ td .edit {
     mask: url(../images/penIcon.svg);
 }
 
-tr:nth-child(odd){
-    background-color: #f2f2f2;
+td:nth-child(3) {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+td:nth-child(3):hover {
+    color: #1021f9;
+}
+
+tr:not(.checked):nth-child(odd){
+    background: #f8f8f8;
+}
+
+.checked {
+    border-color: #000742;
+    background: #e0e0e0;
+}
+
+tr {
+    -webkit-transition: background .3s, border-color .3s;
+    transition: background .3s, border-color .3s;
+    border-color: white;
+    border-left: 3px solid white;
+}
+
+th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+th:nth-child(-n+2) {
+    width: 35px;
+}
+
+td:nth-child(1) {
+    cursor: pointer;
+}
+
+td:nth-child(3) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* text-align: left; */
+    overflow: hidden;
+}
+
+th:nth-child(4), th:nth-child(5) {
+    width: 100px;
+}
+
+@media (max-width: 600px) {
+    th:nth-child(1) {
+        width: 10px;
+    }
+
+    th:nth-child(2) {
+        width: 10px;
+    }
+
+    th:nth-child(4) {
+        width: 50px;
+    }
+
+    th:nth-child(5) {
+        width: 40px;
+    }
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    input[type='checkbox'] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        height: 21px;
+        width: 21px;
+        position: relative;
+        margin: 0;
+        cursor: pointer;
+        border: 1px solid #BBC1E1;
+        background: #fff;
+        border-radius: 3px;
+        -webkit-transition: background .3s, border-color .3s;
+        transition: background .3s, border-color .3s;
+    }
+    input[type='checkbox']:checked {
+        background: #000742;
+        border: 1px solid #000742;
+    }
+    input[type='checkbox']:disabled {
+        cursor: not-allowed;
+        opacity: .5;
+    }
+    input[type='checkbox']:hover:not(:disabled) {
+        border: 1px solid #000742;
+    }
+    td input[type='checkbox']:after {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 9px;
+        border: 2px solid #fff;
+        border-top: 0;
+        border-left: 0;
+        left: 6px;
+        top: 3px;
+        -webkit-transform: rotate(43deg);
+        transform: rotate(43deg);
+    }
+
+    th input[type='checkbox']:after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        border-top: 3px solid #fff;
+
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    th input[type='checkbox'], td input[type='checkbox'] {
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
