@@ -44,3 +44,7 @@ input:focus {
 button:focus {
     outline: none;
 }
+
+span.yellow {
+    background: yellow;
+}

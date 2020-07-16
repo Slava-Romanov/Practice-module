@@ -27,10 +27,6 @@
     align-items: center;
 }
 
-.edit_buttons {
-
-}
-
 @media (max-width: 750px) {
     .red_btn {
         font-size: 0;
