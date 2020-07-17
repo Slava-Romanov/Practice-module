@@ -6,42 +6,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const max_points_in_module = 10;
 
+    const name_modules = ['Веб-верстка', 'JavaScript', 'Система контроля версий Git',
+        'Онлайн сессии по Верб-разработке', 'Универсальные знания программиста'];
+    const points_modules = [35, 35, 5, 15, 10];
+    const lessons_modules = [10, 12, 3, 7, 5];
+
 
     let data = {};
 
     data.modules = [];
     for (let i = 0; i < modules; i++) {
-        data.modules.push({ name: 'Модуль ' + i, num : Number(i), max_points : max_points_in_module });
+        data.modules.push({ name: name_modules[i], num : Number(i), max_points : points_modules[i] });
     }
 
     let types = ['lec', 'sem', 'rk', 'ex'];
 
     data.lessons = [];
     for (let i = 0; i < modules; i++) {
-        for (let j = 0; j < lessons_in_module; j++) {
+        for (let j = 0; j < lessons_modules[i]; j++) {
             data.lessons.push({ name: 'Занятие ' + j, num : Number(j),
                 type : types[Math.floor(types.length * Math.random())], module : Number(i),
                 description : ('Описание ' + j + ' ').repeat(10)});
         }
     }
 
-    data.homeworks = [];
-    for (let i = 0; i < modules; i++) {
-            for (let j = 0; j < homework_in_module; j++) {
-                const lesson_start = get_random_lesson(data, i);
-                data.homeworks.push({
-                    name: 'ДЗ ' + j,
-                    lesson_start: lesson_start,
-                    lesson_end: lesson_start + Math.floor(4 * Math.random()) + 1,
-                    date_end: randomDate(new Date(2020, 0, 1), new Date()),
-                    description: ('Описание ' + j + ' ').repeat(10)
-                });
-            }
-    }
+    // data.homeworks = [];
+    // for (let i = 0; i < modules; i++) {
+    //         for (let j = 0; j < homework_in_module; j++) {
+    //             const lesson_start = get_random_lesson(data, i);
+    //             data.homeworks.push({
+    //                 name: 'ДЗ ' + j,
+    //                 lesson_start: lesson_start,
+    //                 lesson_end: lesson_start + Math.floor(4 * Math.random()) + 1,
+    //                 date_end: randomDate(new Date(2020, 0, 1), new Date()),
+    //                 description: ('Описание ' + j + ' ').repeat(10)
+    //             });
+    //         }
+    // }
 
     data.marks_lesson = [];
     for (let i = 0; i < modules; i++) {
-        for (let j = 0; j < lessons_in_module; j++) {
+        for (let j = 0; j < lessons_modules[i]; j++) {
             const marks = Math.floor(max_marks_in_lesson * Math.random());
             for (let k = 0; k < marks; k++) {
                 data.marks_lesson.push({

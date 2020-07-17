@@ -8,7 +8,7 @@ import penIcon from './../../images/penIcon.svg';
 import trashIcon from './../../images/trashIcon.svg';
 import editIcon from './../../images/editIcon.svg';
 
-import { newModuleModal, editModuleModal } from './../Modal/modal';
+import { newModuleModal, editModuleModal, deleteModuleModal } from './../Modal/modal';
 
 export const createPageModules = (store) => {
     store.tmp = {};
@@ -156,7 +156,7 @@ const createEditPanel = (evt, store) => {
              <button className="grey_btn" id="UpEP" onClick={e => moveUp(e, store)}><img src={upIcon}/> Переместить выше </button>
              <button className="grey_btn" id="DownEP" onClick={e => moveDown(e, store)}><img src={downIcon}/> Переместить ниже </button>
              <button className="grey_btn" id="EditEP" onClick={e => editCheck(e, store)}><img src={penIcon}/> Редактировать </button>
-             <button className="red_btn"><img src={trashIcon}/> Удалить </button>
+             <button className="red_btn" onClick={e => deleteCheck(e, store)}><img src={trashIcon}/> Удалить </button>
          </div>;
 
     render(edit_panel, document.getElementById('edit_panel'));
@@ -174,12 +174,27 @@ const editCheck = (evt, store) => {
     editModuleModal(evt, store, findCheckNum(store));
 };
 
+const deleteCheck = (evt, store) => {
+    deleteModuleModal(evt, store, allChecked(store));
+};
+
 const findCheckNum = (store) => {
     for (let i = 0; i < store.tmp.entry_count; i++) {
         if (document.getElementById("module_check_" + i).checked) {
             return document.getElementById("module_check_" + i).getAttribute('num');
         }
     }
+};
+
+const allChecked = (store) => {
+    let checked = [];
+    for (let i = 0; i < store.tmp.entry_count; i++) {
+        if (document.getElementById("module_check_" + i).checked) {
+            checked.push(document.getElementById("module_check_" + i).getAttribute('num'));
+        }
+    }
+
+    return checked;
 };
 
 export const unCheckAll = (store) => {
@@ -193,7 +208,7 @@ export const unCheckAll = (store) => {
     const checkbox = document.getElementById("all_check");
     checkbox.checked = false;
 
-    render(null, document.getElementById('edit_panel'));
+    //render(null, document.getElementById('edit_panel'));
 };
 
 export const updateTable = (store) => {
@@ -213,8 +228,10 @@ const moveUp = (evt, store) => {
 
     updateTable(store);
     unCheckAll(store);
+    //createEditPanel(evt, store);
 
     let cn_index = 0;
+    document.getElementById("all_check").checked = true;
     for (let i = 0; i < store.tmp.entry_count; i++) {
         const check = document.getElementById("module_check_" + i);
         if (check_num[cn_index] === Number(check.getAttribute('num'))) {
@@ -249,8 +266,10 @@ const moveDown = (evt, store) => {
 
     updateTable(store);
     unCheckAll(store);
+    //createEditPanel(evt, store);
 
     let cn_index = 0;
+    document.getElementById("all_check").checked = true;
     for (let i = store.tmp.entry_count - 1; i > -1; i--) {
         const check = document.getElementById("module_check_" + i);
 

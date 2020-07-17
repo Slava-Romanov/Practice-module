@@ -69,6 +69,52 @@ export const editModuleModal = (evt, store, id) => {
     render(modal, document.getElementById('modal'));
 };
 
+export const deleteModuleModal = (evt, store, checked) => {
+    let text = 'Вы действительно хотите удалить выбранный модуль?';
+    if (checked.length > 1) {
+        text = 'Вы действительно хотите удалить выбранные модули?';
+    }
+
+    const modal = <div className='modal'>
+        <div className='background' onClick={ e => closeModal(e) }>
+        </div>
+        <div className='window'>
+            <div className='close' onClick={ e => closeModal(e) }><img src={closeModalIcon}/>
+            </div>
+            <div className='title'>{text}
+            </div>
+            <div className='center err'>
+                Внимание! Вместе с удалением каждого модуля,<br/>удаляются связанные с ним занятия,<br/>домашние задания и оценки
+            </div>
+            <div className='choice'>
+                <input type='submit' className='blue_btn' value='Да' onClick={ e => deleteModule(e, store, checked) }/>
+                <input type='submit' className='blue_btn' value='Нет' onClick={ e => closeModal(e) }/>
+            </div>
+        </div>
+    </div>;
+
+    render(modal, document.getElementById('modal'));
+};
+
+export const deleteModule = (evt, store, checked) => {
+    // todo: Рекурсивное удаление занятий, дз, оценок
+    let cn_index = checked.length - 1;
+    for (let i = store.modules.length - 1; i > -1; i--) {
+        if (store.modules[i].num == checked[cn_index]) {
+            store.modules.splice(i, 1);
+            for (let j = i; j < store.modules.length; j++) {
+                store.modules[j].num--;
+            }
+            cn_index--;
+        }
+    }
+    updateTable(store);
+    unCheckAll(store);
+
+    render(null, document.getElementById('edit_panel'));
+    infoModuleModal('Удаление успешно произведено');
+};
+
 export const closeModal = (evt) => {
     render(null, document.getElementById('modal'));
 };
@@ -125,6 +171,7 @@ export const addModule = (evt, store, id = null) => {
         }
         updateTable(store);
         unCheckAll(store);
+        render(null, document.getElementById('edit_panel'));
     }
 };
 
