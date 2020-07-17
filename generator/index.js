@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const max_points_in_module = 10;
 
     const name_modules = ['Веб-верстка', 'JavaScript', 'Система контроля версий Git',
-        'Онлайн сессии по Верб-разработке', 'Универсальные знания программиста'];
+        'Онлайн сессии по Веб-разработке', 'Универсальные знания программиста'];
     const points_modules = [35, 35, 5, 15, 10];
     const lessons_modules = [10, 12, 3, 7, 5];
 
