@@ -1,8 +1,15 @@
 table {
-    margin-top: 25px;
     width: 100%;
     border-collapse: collapse;
     table-layout:fixed;
+}
+
+h1 {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #ababab;
+    font-style: italic;
+    font-weight: 400;
 }
 
 th {
@@ -83,8 +90,13 @@ th:nth-child(6) {
     width: 20px;
 }
 
+td:nth-child(6) {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 td:nth-child(6):hover {
-     cursor: pointer;
+    opacity: 1;
  }
 
 td img {

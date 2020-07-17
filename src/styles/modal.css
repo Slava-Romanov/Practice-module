@@ -1,0 +1,126 @@
+@keyframes visibleAnimation {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.modal .window {
+    background: #FFFFFF;
+    border-radius: 10px;
+    width: 500px;
+    padding: 20px;
+    height: auto;
+
+    max-width: 380px;
+    flex: 1;
+
+    text-align: center;
+    z-index: 3;
+    margin: 10px;
+    animation: visibleAnimation .5s 1 ease-in-out;
+
+    position: relative;
+}
+
+.modal .window .title, .modal .window .title_info {
+     font-size: 18px;
+     font-weight: bold;
+     margin: 10px;
+}
+
+.modal .window .title_info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.modal .window .mini_title {
+    font-size: 14px;
+    margin: 10px;
+}
+
+.modal .window a {
+    text-decoration: none;
+}
+
+.modal .background {
+    background: rgba(0,0,0,0.3);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    animation: visibleAnimation .5s 1 ease-in-out;
+}
+
+.modal .line {
+    background: #FCFBFB;
+    border: 2px solid #C9C9C9;
+    border-radius: 12px;
+    height: 40px;
+    width: 300px;
+    margin: 10px auto 10px auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.modal .line input {
+    border: none;
+    background: none;
+    height: 100%;
+    width: 95%;
+    font-size: 13px;
+    font-weight: bold;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.modal .blue_btn {
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    width: 300px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto 10px auto;
+
+    box-shadow: none;
+}
+
+.modal .window .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.modal .window .err {
+    margin: auto;
+    width: 280px;
+    text-align: left;
+    color: red;
+    font-size: 10px;
+    margin-top: -10px;
+}
+
+.modal .window .close img {
+    width: 15px;
+}
+
+.modal .window .close:hover {
+    opacity: 1;
+}

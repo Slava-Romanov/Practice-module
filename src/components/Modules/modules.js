@@ -8,6 +8,8 @@ import penIcon from './../../images/penIcon.svg';
 import trashIcon from './../../images/trashIcon.svg';
 import editIcon from './../../images/editIcon.svg';
 
+import { newModuleModal, editModuleModal } from './../Modal/modal';
+
 export const createPageModules = (store) => {
     store.tmp = {};
     store.tmp.entry_count = 0;
@@ -25,7 +27,7 @@ const addTopBlock = (store) => {
             <input className="search_input" id="search_main_input" type="text" onInput={ e => searchInput(e, store) }>
             </input>
         </div>
-        <button className="blue_btn"> +Новый модуль </button>
+        <button className="blue_btn" onClick={ e => newModuleModal(e, store) }> +Новый модуль </button>
     </Fragment>;
 
     render(top_block, document.getElementById('top_block'));
@@ -82,7 +84,12 @@ const addTable = (store) => {
         [top_table, entries]
     );
 
-    render([table], document.getElementById('table_block'));
+    const label =
+        <h1>
+            Таблица модулей дисциплины
+        </h1>;
+
+    render([label, table], document.getElementById('table_block'));
 };
 
 const getKey = (evt, store) => {
@@ -99,6 +106,7 @@ const addModules = (store) => {
     let data_table = [];
     if (!store.tmp.searchNumArr) {
         for(let i = 0; i < store.modules.length; i++) {
+            console.log(i);
             data_table.push(createLine(store, i));
         }
         store.tmp.entry_count = store.modules.length;
@@ -113,6 +121,8 @@ const addModules = (store) => {
 };
 
 const createLine = (store, i, num = i) => {
+    //console.log(store.modules[i].name);
+    // console.log(i);
     let name = store.modules[i].name;
     let findIndex = store.modules[i].name.toLowerCase().indexOf(store.tmp.search);
     let startStr = '', middleStr = '', endStr = '';
@@ -127,21 +137,25 @@ const createLine = (store, i, num = i) => {
         <td id={'module_td_check_' + num} onClick={ e => changeTdCheckbox(e, store)}>
             <input type="checkbox" id={"module_check_" + num} num={store.modules[i].num} onClick={ e => changeCheckbox(e, store) }/>
         </td>
-        <td>{store.modules[i].num}</td>
+        <td>{Number(store.modules[i].num)+1}</td>
         <td>{name}</td>
         <td>{countLessons(store, store.modules[i].num)}</td>
         <td>{store.modules[i].max_points}</td>
-        <td><img src={editIcon}/></td>
+        <td><img id={"pen_" + store.modules[i].num} src={editIcon} onClick={ e => editModule(e, store) }/></td>
     </tr>;
+};
+
+const editModule = (evt, store) => {
+    editModuleModal(evt, store, evt.currentTarget.id.split('_')[1]);
 };
 
 const createEditPanel = (evt, store) => {
     const edit_panel =
          <div className="edit_panel">
-             <button className="grey_btn" onClick={e => removeSelection(e, store)}> <img src={closeIcon}/>Снять выделение </button>
+             <button className="grey_btn" onClick={e => removeSelection(e, store)}><img src={closeIcon}/>Снять выделение </button>
              <button className="grey_btn" id="UpEP" onClick={e => moveUp(e, store)}><img src={upIcon}/> Переместить выше </button>
              <button className="grey_btn" id="DownEP" onClick={e => moveDown(e, store)}><img src={downIcon}/> Переместить ниже </button>
-             <button className="grey_btn" id="EditEP"><img src={penIcon}/> Редактировать </button>
+             <button className="grey_btn" id="EditEP" onClick={e => editCheck(e, store)}><img src={penIcon}/> Редактировать </button>
              <button className="red_btn"><img src={trashIcon}/> Удалить </button>
          </div>;
 
@@ -156,6 +170,37 @@ const swapModules = (store, a, b) => {
     store.modules[a].num--;
 };
 
+const editCheck = (evt, store) => {
+    editModuleModal(evt, store, findCheckNum(store));
+};
+
+const findCheckNum = (store) => {
+    for (let i = 0; i < store.tmp.entry_count; i++) {
+        if (document.getElementById("module_check_" + i).checked) {
+            return document.getElementById("module_check_" + i).getAttribute('num');
+        }
+    }
+};
+
+export const unCheckAll = (store) => {
+    for (let i = 0; i < store.tmp.entry_count; i++) {
+        if (document.getElementById("module_check_" + i).checked) {
+            document.getElementById("module_check_" + i).checked = false;
+            document.getElementById("module_tr_" + i).classList.remove("checked");
+        }
+    }
+
+    const checkbox = document.getElementById("all_check");
+    checkbox.checked = false;
+
+    render(null, document.getElementById('edit_panel'));
+};
+
+export const updateTable = (store) => {
+    createSearchNumArr(store);
+    addTable(store);
+};
+
 const moveUp = (evt, store) => {
     let check_num = [];
     for (let i = 0; i < store.tmp.entry_count; i++) {
@@ -166,15 +211,8 @@ const moveUp = (evt, store) => {
         }
     }
 
-    createSearchNumArr(store);
-    addTable(store);
-
-    for (let i = 0; i < store.tmp.entry_count; i++) {
-        if (document.getElementById("module_check_" + i).checked) {
-            document.getElementById("module_check_" + i).checked = false;
-            document.getElementById("module_tr_" + i).classList.remove("checked");
-        }
-    }
+    updateTable(store);
+    unCheckAll(store);
 
     let cn_index = 0;
     for (let i = 0; i < store.tmp.entry_count; i++) {
@@ -209,15 +247,8 @@ const moveDown = (evt, store) => {
         }
     }
 
-    createSearchNumArr(store);
-    addTable(store);
-
-    for (let i = 0; i < store.tmp.entry_count; i++) {
-        if (document.getElementById("module_check_" + i).checked) {
-            document.getElementById("module_check_" + i).checked = false;
-            document.getElementById("module_tr_" + i).classList.remove("checked");
-        }
-    }
+    updateTable(store);
+    unCheckAll(store);
 
     let cn_index = 0;
     for (let i = store.tmp.entry_count - 1; i > -1; i--) {
