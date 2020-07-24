@@ -1,9 +1,10 @@
-import { Fragment, render, h } from 'preact';
+import { render, h } from 'preact';
 
-import closeModalIcon from './../../images/closeModalIcon.svg';
-import {unCheckAll, updateTable} from '../Modules/modules';
+import closeModalIcon from './../../../images/closeModalIcon.svg';
+import Storage from "../../utils/store";
+import {addTable, checkControl, countChecked, getChecked, uncheckAll} from "../Table/table";
 
-export const newModuleModal = (evt, store) => {
+export const newModuleModal = (evt) => {
     const modal = <div className='modal'>
         <div className='background' onClick={ e => closeModal(e) }>
         </div>
@@ -27,7 +28,7 @@ export const newModuleModal = (evt, store) => {
             <div id='errPointsModal'>
             </div>
             <a>
-                <input type='submit' className='blue_btn' value='Создать' onClick={ e => addModule(e, store) }>
+                <input type='submit' className='blue_btn' value='Создать' onClick={ e => addModule(e) }>
                 </input>
             </a>
         </div>
@@ -36,7 +37,7 @@ export const newModuleModal = (evt, store) => {
     render(modal, document.getElementById('modal'));
 };
 
-export const editModuleModal = (evt, store, id) => {
+export const editModuleModal = (num) => {
     const modal = <div className='modal'>
         <div className='background' onClick={ e => closeModal(e) }>
         </div>
@@ -48,19 +49,22 @@ export const editModuleModal = (evt, store, id) => {
             <div id='infoModalMessage'>
             </div>
             <div className='line'>
-                <input type='text' id='nameModal' required placeholder='Название модуля' value={store.modules[id].name}>
+                <input type='text' id='nameModal' required placeholder='Название модуля'
+                       value={Storage.getModuleByID(num).name}>
                 </input>
             </div>
             <div id='errNameModal'>
             </div>
             <div className='line'>
-                <input type='text' id='pointsModal' required placeholder='Максимальное количество баллов' value={store.modules[id].max_points}>
+                <input type='text' id='pointsModal' required placeholder='Максимальное количество баллов'
+                       value={Storage.getModuleByID(num).max_points}>
                 </input>
             </div>
             <div id='errPointsModal'>
             </div>
             <a>
-                <input type='submit' className='blue_btn' value='Сохранить' onClick={ e => addModule(e, store, id) }>
+                <input type='submit' className='blue_btn'
+                       value='Сохранить' onClick={ e => addModule(e, num) }>
                 </input>
             </a>
         </div>
@@ -69,9 +73,9 @@ export const editModuleModal = (evt, store, id) => {
     render(modal, document.getElementById('modal'));
 };
 
-export const deleteModuleModal = (evt, store, checked) => {
+export const deleteModuleModal = (evt) => {
     let text = 'Вы действительно хотите удалить выбранный модуль?';
-    if (checked.length > 1) {
+    if (countChecked() > 1) {
         text = 'Вы действительно хотите удалить выбранные модули?';
     }
 
@@ -87,7 +91,7 @@ export const deleteModuleModal = (evt, store, checked) => {
                 Внимание! Вместе с удалением каждого модуля,<br/>удаляются связанные с ним занятия,<br/>домашние задания и оценки
             </div>
             <div className='choice'>
-                <input type='submit' className='blue_btn' value='Да' onClick={ e => deleteModule(e, store, checked) }/>
+                <input type='submit' className='blue_btn' value='Да' onClick={ e => deleteModule(e) }/>
                 <input type='submit' className='blue_btn' value='Нет' onClick={ e => closeModal(e) }/>
             </div>
         </div>
@@ -96,30 +100,26 @@ export const deleteModuleModal = (evt, store, checked) => {
     render(modal, document.getElementById('modal'));
 };
 
-export const deleteModule = (evt, store, checked) => {
-    // todo: Рекурсивное удаление занятий, дз, оценок
-    let cn_index = checked.length - 1;
-    for (let i = store.modules.length - 1; i > -1; i--) {
-        if (store.modules[i].num == checked[cn_index]) {
-            store.modules.splice(i, 1);
-            for (let j = i; j < store.modules.length; j++) {
-                store.modules[j].num--;
-            }
-            cn_index--;
-        }
+const deleteModule = () => {
+    const checked = getChecked();
+    for (const value of checked) {
+        Storage.deleteModuleByID(value);
     }
-    updateTable(store);
-    unCheckAll(store);
 
-    render(null, document.getElementById('edit_panel'));
+    const searchString = document.getElementById('search_main_input').value.toLowerCase();
+    const elements = Storage.generateSelection('modules', searchString);
+    addTable(elements, 'modules', 'Таблица модулей дисциплины', searchString);
+    uncheckAll();
+    checkControl();
+    closeModal();
     infoModuleModal('Удаление успешно произведено');
 };
 
-export const closeModal = (evt) => {
+const closeModal = (evt) => {
     render(null, document.getElementById('modal'));
 };
 
-export const addModule = (evt, store, id = null) => {
+const addModule = (evt, num = null) => {
     const name = document.getElementById('nameModal').value;
     const points = document.getElementById('pointsModal').value;
 
@@ -152,26 +152,19 @@ export const addModule = (evt, store, id = null) => {
     }
 
     if (!textNameErr && !textPointsErr) {
-        //console.log(store.modules.length);
-        if (!id) {
-            store.modules.push({name:name, max_points:points, num:store.modules.length});
-            //console.log(store.modules.length);
-            render(null, document.getElementById('modal'));
+        if (num === null) {
+            Storage.createModule(name, points);
+            closeModal();
             infoModuleModal('Модуль успешно создан');
         } else {
-            for(let i = 0; i < store.modules.length; i++) {
-                if(store.modules[i].num == id) {
-                    store.modules[i].name = name;
-                    store.modules[i].max_points = points;
-                    break;
-                }
-            }
-            render(null, document.getElementById('modal'));
+            Storage.editModuleByID(num, name, points);
+            closeModal();
             infoModuleModal('Изменения модуля успешно сохранены');
         }
-        updateTable(store);
-        unCheckAll(store);
-        render(null, document.getElementById('edit_panel'));
+        const searchString = document.getElementById('search_main_input').value.toLowerCase();
+        const elements = Storage.generateSelection('modules', searchString);
+        addTable(elements, 'modules', 'Таблица модулей дисциплины', searchString);
+        uncheckAll();
     }
 };
 

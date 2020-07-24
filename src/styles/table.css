@@ -71,6 +71,10 @@ th:nth-child(-n+2) {
     width: 35px;
 }
 
+th:nth-child(1) {
+    cursor: pointer;
+}
+
 td:nth-child(1) {
     cursor: pointer;
 }

@@ -11,38 +11,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const points_modules = [35, 35, 5, 15, 10];
     const lessons_modules = [10, 12, 3, 7, 5];
 
-
     let data = {};
 
     data.modules = [];
     for (let i = 0; i < modules; i++) {
-        data.modules.push({ name: name_modules[i], num : Number(i), max_points : points_modules[i] });
+        data.modules.push({ name: name_modules[i], max_points : points_modules[i] });
     }
 
     let types = ['lec', 'sem', 'rk', 'ex'];
 
     data.lessons = [];
     for (let i = 0; i < modules; i++) {
+        data.lessons.push([]);
         for (let j = 0; j < lessons_modules[i]; j++) {
-            data.lessons.push({ name: 'Занятие ' + j, num : Number(j),
-                type : types[Math.floor(types.length * Math.random())], module : Number(i),
+            data.lessons[i].push({ name: 'Занятие ' + j,
+                type : types[Math.floor(types.length * Math.random())],
                 description : ('Описание ' + j + ' ').repeat(10)});
         }
     }
 
-    // data.homeworks = [];
-    // for (let i = 0; i < modules; i++) {
-    //         for (let j = 0; j < homework_in_module; j++) {
-    //             const lesson_start = get_random_lesson(data, i);
-    //             data.homeworks.push({
-    //                 name: 'ДЗ ' + j,
-    //                 lesson_start: lesson_start,
-    //                 lesson_end: lesson_start + Math.floor(4 * Math.random()) + 1,
-    //                 date_end: randomDate(new Date(2020, 0, 1), new Date()),
-    //                 description: ('Описание ' + j + ' ').repeat(10)
-    //             });
-    //         }
-    // }
+    data.homeworks = [];
+    for (let i = 0; i < modules; i++) {
+            for (let j = 0; j < homework_in_module; j++) {
+                const lesson_start = get_random_lesson(data, i);
+                data.homeworks.push({
+                    name: 'ДЗ ' + j,
+                    lesson_start: lesson_start,
+                    lesson_end: lesson_start + Math.floor(4 * Math.random()) + 1,
+                    date_end: randomDate(new Date(2020, 0, 1), new Date()),
+                    description: ('Описание ' + j + ' ').repeat(10)
+                });
+            }
+    }
 
     data.marks_lesson = [];
     for (let i = 0; i < modules; i++) {
@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     data.marks_homework = [];
     for (let i = 0; i < modules; i++) {
         for (let j = 0; j < homework_in_module; j++) {
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-
 
     const jsonData = JSON.stringify(data);
     download(jsonData, 'data.json', 'text/plain');
@@ -91,10 +89,11 @@ function randomDate(start, end) {
 }
 
 function get_random_lesson(data, module_id) {
-    let rand = Math.floor((data.lessons.length - 5) * Math.random());
+    let rand = Math.floor((data.lessons[module_id].length - 3) * Math.random());
 
-    while (data.lessons[rand].module != module_id) {
-        rand = Math.floor((data.lessons.length - 5) * Math.random());
-    }
-    return data.lessons[rand].num;
+    // console.log(rand);
+    // while (data.lessons[module_id][rand].module != module_id) {
+    //     rand = Math.floor((data.lessons.length - 3) * Math.random());
+    // }
+    return rand;
 }

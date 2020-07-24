@@ -1,7 +1,8 @@
 import { Fragment, render, h } from 'preact';
-import { createPageModules } from './../Modules/modules'
+import { createPageModules } from '../Modules/modules'
+import Storage from './../../utils/store'
 
-export const createPage = (store) => {
+export const createPage = () => {
     const page = <Fragment>
         <div id="modal">
         </div>
@@ -21,5 +22,11 @@ export const createPage = (store) => {
 
     render(page, document.getElementById('root'));
 
-    createPageModules(store);
+    fetch('/data.json').then((response) => {
+            return response.json();
+        }).then((data) => {
+            Storage.store = data;
+        }).then(() => {
+            createPageModules();
+        });
 };
