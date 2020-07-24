@@ -32,10 +32,7 @@ export const addTopBlock = (type) => {
 };
 
 const searchModulesUpdate = (evt) => {
-    const search = evt.currentTarget.value.toLowerCase();
-    const elements = Storage.generateSelection('modules',  search);
-
-    addTable(elements, 'modules', 'Таблица модулей дисциплины', search);
+    addTable('modules');
     uncheckAll();
     checkControl();
 };

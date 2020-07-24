@@ -1,9 +1,7 @@
 import { addTopBlock } from '../Top/top';
-import {addTable } from '../Table/table';
-import Storage from './../../utils/store'
+import { addTable } from '../Table/table';
 
 export const createPageModules = () => {
     addTopBlock('modules');
-    const elements = Storage.generateSelection('modules', '');
-    addTable(elements, 'modules', 'Таблица модулей дисциплины');
+    addTable('modules');
 };

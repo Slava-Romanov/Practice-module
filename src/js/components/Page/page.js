@@ -1,6 +1,7 @@
 import { Fragment, render, h } from 'preact';
-import { createPageModules } from '../Modules/modules'
+
 import Storage from './../../utils/store'
+import { createPageModules } from '../Modules/modules'
 
 export const createPage = () => {
     const page = <Fragment>
@@ -9,10 +10,8 @@ export const createPage = () => {
         <div className="page">
             <div className="page_content">
                 <div className="top_block" id="top_block">
-
                 </div>
                 <div id="table_block">
-
                 </div>
             </div>
         </div>

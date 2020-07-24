@@ -1,17 +1,20 @@
 import { render, h } from 'preact';
 
-import closeModalIcon from './../../../images/closeModalIcon.svg';
 import Storage from "../../utils/store";
 import {addTable, checkControl, countChecked, getChecked, uncheckAll} from "../Table/table";
+
+import closeModalIcon from './../../../images/closeModalIcon.svg';
 
 export const newModuleModal = (evt) => {
     const modal = <div className='modal'>
         <div className='background' onClick={ e => closeModal(e) }>
         </div>
         <div className='window'>
-            <div className='close' onClick={ e => closeModal(e) }><img src={closeModalIcon}/>
+            <div className='close' onClick={ e => closeModal(e) }>
+                <img src={closeModalIcon}/>
             </div>
-            <div className='title'>Создание нового модуля
+            <div className='title'>
+                Создание нового модуля
             </div>
             <div id='infoModalMessage'>
             </div>
@@ -20,7 +23,7 @@ export const newModuleModal = (evt) => {
                 </input>
             </div>
             <div id='errNameModal'>
-                </div>
+            </div>
             <div className='line'>
                 <input type='text' id='pointsModal' required placeholder='Максимальное количество баллов'>
                 </input>
@@ -42,9 +45,11 @@ export const editModuleModal = (num) => {
         <div className='background' onClick={ e => closeModal(e) }>
         </div>
         <div className='window'>
-            <div className='close' onClick={ e => closeModal(e) }><img src={closeModalIcon}/>
+            <div className='close' onClick={ e => closeModal(e) }>
+                <img src={closeModalIcon}/>
             </div>
-            <div className='title'>Изменение модуля
+            <div className='title'>
+                Изменение модуля
             </div>
             <div id='infoModalMessage'>
             </div>
@@ -83,12 +88,16 @@ export const deleteModuleModal = (evt) => {
         <div className='background' onClick={ e => closeModal(e) }>
         </div>
         <div className='window'>
-            <div className='close' onClick={ e => closeModal(e) }><img src={closeModalIcon}/>
+            <div className='close' onClick={ e => closeModal(e) }>
+                <img src={closeModalIcon}/>
             </div>
-            <div className='title'>{text}
+            <div className='title'>
+                {text}
             </div>
             <div className='center err'>
-                Внимание! Вместе с удалением каждого модуля,<br/>удаляются связанные с ним занятия,<br/>домашние задания и оценки
+                Внимание! Вместе с удалением каждого модуля,<br/>
+                удаляются связанные с ним занятия,<br/>
+                домашние задания и оценки
             </div>
             <div className='choice'>
                 <input type='submit' className='blue_btn' value='Да' onClick={ e => deleteModule(e) }/>
@@ -106,9 +115,7 @@ const deleteModule = () => {
         Storage.deleteModuleByID(value);
     }
 
-    const searchString = document.getElementById('search_main_input').value.toLowerCase();
-    const elements = Storage.generateSelection('modules', searchString);
-    addTable(elements, 'modules', 'Таблица модулей дисциплины', searchString);
+    addTable('modules');
     uncheckAll();
     checkControl();
     closeModal();
@@ -161,21 +168,21 @@ const addModule = (evt, num = null) => {
             closeModal();
             infoModuleModal('Изменения модуля успешно сохранены');
         }
-        const searchString = document.getElementById('search_main_input').value.toLowerCase();
-        const elements = Storage.generateSelection('modules', searchString);
-        addTable(elements, 'modules', 'Таблица модулей дисциплины', searchString);
+        addTable('modules');
         uncheckAll();
     }
 };
 
-export const infoModuleModal = (info) => {
+const infoModuleModal = (info) => {
     const modal = <div className='modal'>
         <div className='background' onClick={ e => closeModal(e) }>
         </div>
         <div className='window'>
-            <div className='close' onClick={ e => closeModal(e) }><img src={closeModalIcon}/>
+            <div className='close' onClick={ e => closeModal(e) }>
+                <img src={closeModalIcon}/>
             </div>
-            <div className='title_info'>{info}
+            <div className='title_info'>
+                {info}
             </div>
             <a>
                 <input type='submit' className='blue_btn' value='Ок' onClick={ e => closeModal(e) }/>
