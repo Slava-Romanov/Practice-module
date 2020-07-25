@@ -1,8 +1,3 @@
-@keyframes visibleAnimation {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 .modal {
     width: 100%;
     height: 100%;

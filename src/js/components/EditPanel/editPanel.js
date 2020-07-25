@@ -13,19 +13,19 @@ import trashIcon from '../../../images/trashIcon.svg';
 export const showEditPanel = (moveUpBool, moveDownBool, isEditBool) => {
     const edit_panel =
         <div className='edit_panel'>
-            <button className='grey_btn' onClick={() => removeSelection()}>
+            <button className='ep_btn grey_bg' onClick={() => removeSelection()}>
                 <img src={closeIcon}/>Снять выделение
             </button>
-            <button className='grey_btn' id='UpEP' onClick={() => moveUp()} disabled={moveUpBool}>
+            <button className='ep_btn grey_bg' id='UpEP' onClick={() => moveUp()} disabled={moveUpBool}>
                 <img src={upIcon}/> Переместить выше
             </button>
-            <button className='grey_btn' id='DownEP' onClick={() => moveDown()} disabled={moveDownBool}>
+            <button className='ep_btn grey_bg' id='DownEP' onClick={() => moveDown()} disabled={moveDownBool}>
                 <img src={downIcon}/> Переместить ниже
             </button>
-            <button className='grey_btn' id='EditEP' onClick={() => editCheck()} disabled={isEditBool}>
+            <button className='ep_btn grey_bg' id='EditEP' onClick={() => editCheck()} disabled={isEditBool}>
                 <img src={penIcon}/> Редактировать
             </button>
-            <button className='red_btn' onClick={e => deleteModuleModal(e)}>
+            <button className='ep_btn red_bg' onClick={e => deleteModuleModal(e)}>
                 <img src={trashIcon}/> Удалить
             </button>
         </div>;

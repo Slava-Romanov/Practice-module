@@ -1,21 +1,22 @@
 .page {
-    padding: 2px;
-    background: #EFEFEF;
     max-width: 980px;
-    margin: auto;
-    margin-top: 40px;
+    margin: auto 40px auto auto;
+    padding: 2px;
+
+    background: #EFEFEF;
     border-radius: 9px;
 }
 
 .page_content {
     min-height: 600px;
+    padding: 10px;
+
     background: white;
     border-radius: 9px;
-    padding: 10px;
 }
 
 .top_block {
     display: flex;
-    flex-direction: row;
+    /*flex-direction: row;*/
     align-items: center;
 }

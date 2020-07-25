@@ -1,70 +1,76 @@
-.blue_btn {
-    font-size: 13px;
-    padding: 8px;
+.top_btn {
     height: 35px;
-    color: #FFFFFF;
-    background: #005FF9;
-    flex: 0 0 auto;
-    border: none;
+    padding: 8px;
 
-    background: #005FF9;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 7px;
-    cursor: pointer;
+    font-size: 13px;
     font-weight: 600;
+
+    color: #FFFFFF;
+    background: #f22bf9;
+
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.blue_btn:hover:not(:disabled) {
-    background: #1021f9;
-}
-
-.grey_btn:active:not(:disabled), .red_btn:active:not(:disabled), .blue_btn:active:not(:disabled) {
-    transform: translateY(2px);
-}
-
-.grey_btn, .red_btn {
-    font-size: 13px;
-    color: #FFFFFF;
-
-    border: none;
-    margin: 0;
-    padding: 10px;
-
-    cursor: pointer;
-    font-weight: 600;
-    background: #939393;
-    border-radius: 15px;
-
+.ep_btn {
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    margin: 0;
+    padding: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #FFFFFF;
+    background: #f22bf9;
+
+    border: none;
+    border-radius: 15px;
+
+    cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.grey_btn {
-    margin-right: 10px;
+.top_btn:disabled, .ep_btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
 }
 
-.grey_btn:hover:not(:disabled) {
-    background: #828282;
+.top_btn:active:not(:disabled), .ep_btn:active:not(:disabled) {
+    transform: translateY(2px);
 }
 
-.red_btn img, .grey_btn img {
+.ep_btn img {
     height: 14px;
     margin-right: 5px;
 }
 
-.red_btn {
-    background: #FF4646;
-    border-radius: 15px;
+.grey_bg {
+    background: #939393;
 }
 
-.red_btn:hover:not(:disabled) {
+.grey_bg:hover:not(:disabled) {
+    background: #828282;
+}
+
+.red_bg {
+    background: #FF4646;
+}
+
+.red_bg:hover:not(:disabled) {
     background: #ff1240;
 }
 
-.blue_btn:disabled, .grey_btn:disabled, .red_btn:disabled {
-    cursor: not-allowed;
-    opacity: 0.4;
+.blue_bg {
+    background: #005FF9;
+}
+
+.blue_bg:hover:not(:disabled) {
+    background: #1021f9;
 }

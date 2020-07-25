@@ -25,7 +25,7 @@ export const addTopBlock = (type) => {
             <input className='search_input' id='search_main_input' type='text' onInput={ e => searchUpdate(e) }>
             </input>
         </div>
-        <button className='blue_btn' onClick={ e => newElementModal(e) }> +Новый модуль </button>
+        <button className='top_btn blue_bg' onClick={ e => newElementModal(e) }> +Новый модуль </button>
     </Fragment>;
 
     render(top_block, document.getElementById('top_block'));

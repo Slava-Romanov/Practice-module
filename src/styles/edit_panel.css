@@ -1,42 +1,33 @@
-@keyframes upAnimation {
-    from {
-        opacity: 0;
-        transform: translate(-50%, 100%); }
-    to {
-        opacity: 1;
-        transform: translate(-50%, 0%); }
-}
-
-
 .edit_panel {
     position: fixed;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     width: auto;
-    animation: upAnimation .3s 1 ease-in-out;
+    padding: 10px;
 
     background: #191933;
     border-radius: 20px 20px 0 0;
     white-space: nowrap;
 
-    padding: 10px;
+    transform: translateX(-50%);
+    animation: upAnimationEP .3s 1 ease-in-out;
+}
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.edit_panel .grey_bg {
+    margin-right: 10px;
 }
 
 @media (max-width: 750px) {
-    .red_btn {
+    .ep_btn {
         font-size: 0;
     }
 
-    .grey_btn {
-        font-size: 0;
-    }
-
-    .red_btn img, .grey_btn img {
+    .ep_btn img {
         margin-left: 10px;
         margin-right: 10px;
     }
