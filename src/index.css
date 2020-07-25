@@ -2,10 +2,14 @@
 
 @import './styles/animations.css';
 @import './styles/buttons.css';
+@import './styles/input.css';
 
 @import './styles/page.css';
 @import './styles/modal.css';
 
 @import './styles/search.css';
 @import './styles/edit_panel.css';
+
+@import './styles/modules.css';
 @import './styles/table.css';
+

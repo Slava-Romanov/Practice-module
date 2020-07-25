@@ -1,3 +1,7 @@
+button:focus {
+    outline: none;
+}
+
 .top_btn {
     height: 35px;
     padding: 8px;
@@ -37,12 +41,28 @@
     transition: background 0.3s ease;
 }
 
-.top_btn:disabled, .ep_btn:disabled {
+.standard_btn {
+    display: block;
+    height: 40px;
+    width: 300px;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: none;
+
+    cursor: pointer;
+}
+
+.top_btn:disabled, .ep_btn:disabled, .standard_btn:disabled {
     cursor: not-allowed;
     opacity: 0.4;
 }
 
-.top_btn:active:not(:disabled), .ep_btn:active:not(:disabled) {
+.top_btn:active:not(:disabled), .ep_btn:active:not(:disabled), .standard_btn:active:not(:disabled) {
     transform: translateY(2px);
 }
 

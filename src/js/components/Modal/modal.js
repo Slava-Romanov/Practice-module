@@ -31,7 +31,7 @@ export const newModuleModal = (evt) => {
             <div id='errPointsModal'>
             </div>
             <a>
-                <input type='submit' className='blue_btn' value='Создать' onClick={ e => addModule(e) }>
+                <input type='submit' className='standard_btn blue_bg' value='Создать' onClick={ e => addModule(e) }>
                 </input>
             </a>
         </div>
@@ -68,7 +68,7 @@ export const editModuleModal = (num) => {
             <div id='errPointsModal'>
             </div>
             <a>
-                <input type='submit' className='blue_btn'
+                <input type='submit' className='standard_btn blue_bg'
                        value='Сохранить' onClick={ e => addModule(e, num) }>
                 </input>
             </a>
@@ -100,8 +100,8 @@ export const deleteModuleModal = (evt) => {
                 домашние задания и оценки
             </div>
             <div className='choice'>
-                <input type='submit' className='blue_btn' value='Да' onClick={ e => deleteModule(e) }/>
-                <input type='submit' className='blue_btn' value='Нет' onClick={ e => closeModal(e) }/>
+                <input type='submit' className='standard_btn blue_bg' value='Да' onClick={ e => deleteModule(e) }/>
+                <input type='submit' className='standard_btn blue_bg' value='Нет' onClick={ e => closeModal(e) }/>
             </div>
         </div>
     </div>;
@@ -185,7 +185,7 @@ const infoModuleModal = (info) => {
                 {info}
             </div>
             <a>
-                <input type='submit' className='blue_btn' value='Ок' onClick={ e => closeModal(e) }/>
+                <input type='submit' className='standard_btn blue_bg' value='Ок' onClick={ e => closeModal(e) }/>
             </a>
         </div>
     </div>;
