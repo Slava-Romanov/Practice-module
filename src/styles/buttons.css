@@ -2,6 +2,11 @@ button:focus {
     outline: none;
 }
 
+button {
+    touch-action: manipulation;
+    -webkit-appearance: none;
+}
+
 .top_btn {
     height: 35px;
     padding: 8px;

@@ -33,7 +33,7 @@ class Top extends Component {
             <div className='search'>
                 <img src={findIcon}/>
                 <input className='search_input' id='search_main_input' type='text'
-                       onInput={e => this.props.searchUpdate(e, this.props.type)} value={this.props.searchText}>
+                       autocomplete='off' onInput={e => this.props.searchUpdate(e, this.props.type)} value={this.props.searchText}>
                 </input>
             </div>
             <button className='top_btn blue_bg' onClick={() => this.newElementModal()}> {this.newLabel} </button>

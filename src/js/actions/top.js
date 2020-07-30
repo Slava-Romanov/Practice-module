@@ -1,13 +1,14 @@
 import Storage from "../utils/data";
 
 export function searchUpdate(state, e, type) {
+    const search = e.currentTarget.value.toLowerCase();
     return {
         tableData : {
             ...state.tableData,
-            elements: Storage.generateSelection(type, e.currentTarget.value),
+            elements: Storage.generateSelection(type, search),
             allChecked: false
         },
-        searchText: e.currentTarget.value,
+        searchText: search,
         editPanel : {
             ...state.editPanel,
             isOpen: null
