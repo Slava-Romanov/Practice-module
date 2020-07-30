@@ -30,6 +30,11 @@ table[name='modules'] th:nth-child(4), table[name='modules'] th:nth-child(5) {
     width: 100px;
 }
 
+table[name='modules'] td:nth-child(4), table[name='modules'] td:nth-child(5) {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 table[name='modules'] th:nth-child(6) {
     width: 20px;
 }

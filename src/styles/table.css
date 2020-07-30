@@ -33,7 +33,7 @@ table tr:not(.checked):nth-child(odd){
     background: #f8f8f8;
 }
 
-table tr .checked {
+table tr.checked {
     border-color: #000742;
     background: #e0e0e0;
 }
