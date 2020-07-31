@@ -48,10 +48,8 @@ export function getKey(state, e) {
                             }
                     }),
             },
-            modal : { // объединить с инициалзиацией модалов
-                newModuleModal : {},
-                infoModal : {},
-                choiceModal : {}
+            modal : {
+                ...initModals()
             },
             editPanel: {
                 isOpen: null
@@ -192,5 +190,13 @@ export function onInputNewModuleModal(state, e) {
                 [e.currentTarget.id]: e.currentTarget.value
             },
         }
+    }
+}
+
+export function initModals() {
+    return {
+        newModuleModal : {},
+        infoModal : {},
+        choiceModal : {}
     }
 }

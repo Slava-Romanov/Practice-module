@@ -31,20 +31,13 @@ class Storage {
 
         this.store.modules.push(module);
         this.store.lessons.push([]);
-        return this.store.modules;
+        return module;
     }
 
     editModuleByID(id, name, max_points) {
         let module = this.getModuleByID(id);
         module.name = name;
         module.max_points = max_points;
-    }
-
-    createLesson(name, type, description, module) {
-        const lesson = { name : name, type : type, description : description };
-
-        this.store.lessons[module].push(module);
-        return this.store.lessons;
     }
 
     deleteModuleByID(id) {
@@ -54,12 +47,29 @@ class Storage {
         //return this.store.modules[id];
     }
 
+    createLesson(name, type, description, module) {
+        const lesson = { name : name, type : type, description : description };
+
+        this.store.lessons[module].push(lesson);
+        return lesson;
+    }
+
     deleteModuleLessonsByID(id_module) {
         this.store.lessons.splice(id_module, 1);
     }
 
     deleteLessonByID(id_lesson, id_module) {
         this.store.lessons[id_module].splice(id, 1);
+    }
+
+    createHomework(name, desc, start, end, date) {
+        const homework = { name : name, desc : desc, start : start, end : end, date : date };
+        this.store.homeworks.push(homework);
+        return homework;
+    }
+
+    deleteHomeworkByID(id_homework) {
+        this.store.lessons.splice(id_homework, 1);
     }
 
     swap(what, a, b) {
@@ -93,7 +103,7 @@ class Storage {
         }
     }
 
-    generateSelection(type, search) {
+    generateSelection(type, search, id = null) {
         let selection = [];
         switch (type) {
             case 'modules':
@@ -116,6 +126,10 @@ class Storage {
 
     getCountModuleLessons(module_id) {
         return this.store.lessons[module_id].length;
+    }
+
+    getStore() {
+        return this.store;
     }
 }
 
