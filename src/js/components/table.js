@@ -9,6 +9,8 @@ import Storage from '../utils/data';
 import editIcon from '../../images/penIcon.svg';
 import findIcon from "../../images/top/findIcon.svg";
 
+import {routerUrl} from "../utils/data";
+
 const mapToProps = ({type, page, tableData, searchText}) => ({type, page, tableData, searchText});
 
 class Table extends Component {
@@ -95,7 +97,7 @@ class Table extends Component {
                                         {Number(el.num) + 1}
                                     </td>
                                     <td>
-                                        <Link activeClassName="active" href={"/module/" + el.num}>
+                                        <Link activeClassName="active" href={routerUrl + "module/" + el.num}>
                                             {this.fillSearch(el.name, this.props.searchText)}
                                         </Link>
                                     </td>
@@ -140,7 +142,7 @@ class Table extends Component {
                                     </td>
                                     <td>
                                         <Link activeClassName="active"
-                                              href={"/module/" + this.props.page.moduleID + "/lesson/" + el.num}>
+                                              href={routerUrl + "module/" + this.props.page.moduleID + "/lesson/" + el.num}>
                                             {this.fillSearch(el.name, this.props.searchText)}
                                         </Link>
                                     </td>
@@ -151,10 +153,10 @@ class Table extends Component {
                                         {
                                             Storage.getHomeworkByLessonID(el.num, this.props.page.moduleID).map((el2) => (
                                                 el2.start_hw ?
-                                                    <Link activeClassName="active" href={"/homework/" + el2.num}>
+                                                    <Link activeClassName="active" href={routerUrl + "homework/" + el2.num}>
                                                         <div className='hw_s hw'>{el2.name}</div>
                                                     </Link>
-                                                    : <Link activeClassName="active" href={"/homework/" + el2.num}>
+                                                    : <Link activeClassName="active" href={routerUrl + "homework/" + el2.num}>
                                                         <div className='hw_e hw'>{el2.name}</div>
                                                     </Link>
                                             ))

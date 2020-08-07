@@ -50,7 +50,7 @@ module.exports = {
         options: {
           context: 'src',
           name(resourcePath, resourceQuery) {
-              return '[path][name].[ext]';
+              return 'practice/[path][name].[ext]';
               //[contenthash].[ext]
           },
         },

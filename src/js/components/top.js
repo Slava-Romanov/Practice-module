@@ -10,6 +10,8 @@ import editIcon from "../../images/penIcon.svg";
 import trashIcon from "../../images/trashIcon.svg";
 import Note_hw from "./elements/note_hw";
 
+import {routerUrl} from "../utils/data";
+
 const mapToProps = ({type, page, searchText}) => ({type, page, searchText});
 
 class Top extends Component {
@@ -104,10 +106,10 @@ class Top extends Component {
                         {
                             Storage.getHomeworkByLessonID(this.props.page.lessonID, this.props.page.moduleID).map((el2) => (
                                 el2.start_hw ?
-                                    <Link activeClassName="active" href={"/homework/" + el2.num}>
+                                    <Link activeClassName="active" href={routerUrl + "homework/" + el2.num}>
                                         <div className='hw_s hw'>{el2.name}</div>
                                     </Link>
-                                    :<Link activeClassName="active" href={"/homework/" + el2.num}>
+                                    :<Link activeClassName="active" href={routerUrl + "homework/" + el2.num}>
                                         <div className='hw_e hw'>{el2.name}</div>
                                     </Link>
                             ))
@@ -133,10 +135,10 @@ class Top extends Component {
                         </div>
                     </div>
                     <div className='labels'>
-                        <Link activeClassName="active" href={"/module/" + this.hw_start_module + "/lesson/" + this.hw_start_lesson}>
+                        <Link activeClassName="active" href={routerUrl + "module/" + this.hw_start_module + "/lesson/" + this.hw_start_lesson}>
                             <div className='hw_s hw'>{Storage.getLessonByID(this.hw_start_module, this.hw_start_lesson).name}</div>
                         </Link>
-                        <Link activeClassName="active" href={"/module/" + this.hw_end_module + "/lesson/" + this.hw_end_lesson}>
+                        <Link activeClassName="active" href={routerUrl + "module/" + this.hw_end_module + "/lesson/" + this.hw_end_lesson}>
                             <div className='hw_e hw'>{Storage.getLessonByID(this.hw_end_module, this.hw_end_lesson).name}</div>
                         </Link>
                     </div>
