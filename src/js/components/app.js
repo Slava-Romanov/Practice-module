@@ -17,6 +17,8 @@ import NewMarkModal from "./modals/newMark";
 import InfoModal from "./modals/info";
 import ChoiceModal from "./modals/choice";
 
+import { routerUrl } from "../utils/data";
+
 export default class App extends Component {
     render() {
         return (
@@ -32,10 +34,10 @@ export default class App extends Component {
                 <div className='page'>
                     <div className='page_content' id='content'>
                         <Router>
-                        <ModulesPage path="/"/>
-                        <LessonsPage path="/module/:moduleID"/>
-                        <LessonPage path="/module/:moduleID/lesson/:lessonID"/>
-                        <HomeworkPage path="/homework/:homeworkID"/>
+                        <ModulesPage path={routerUrl}/>
+                        <LessonsPage path={routerUrl + "module/:moduleID"}/>
+                        <LessonPage path={routerUrl + "module/:moduleID/lesson/:lessonID"}/>
+                        <HomeworkPage path={routerUrl + "homework/:homeworkID"}/>
                         <div default>Error 404
                             </div>
                         </Router>
