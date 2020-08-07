@@ -1,6 +1,6 @@
 import Storage from "../utils/data";
 import {checkControl, getChecked} from "./table";
-import {newModuleModal} from "./modal";
+import {newModuleModal, newLessonModal, newMarkModal} from "./modal";
 
 export function removeSelection(state) {
     return {
@@ -23,12 +23,12 @@ export function removeSelection(state) {
 export function moveUp(state, type) {
     const checked = getChecked(state);
     for (const value of checked) {
-        Storage.moveUp(type, value);
+        Storage.moveUp(type, value, state.page);
     }
     let data = {
         tableData: {
             ...state.tableData,
-            elements: Storage.generateSelection(type, state.searchText)
+            elements: Storage.generateSelection(type, state.searchText, state.page)
         },
         editPanel: {
             ...state.editPanel
@@ -50,13 +50,13 @@ export function moveUp(state, type) {
 export function moveDown(state, type) {
     const checked = getChecked(state).reverse();
     for (const value of checked) {
-        Storage.moveDown(type, value);
+        Storage.moveDown(type, value, state.page);
     }
 
     let data = {
         tableData: {
             ...state.tableData,
-            elements: Storage.generateSelection(type, state.searchText)
+            elements: Storage.generateSelection(type, state.searchText, state.page)
         },
         editPanel: {
             ...state.editPanel
@@ -78,6 +78,15 @@ export function moveDown(state, type) {
 
 export function editCheck(state) {
     const num = getChecked(state)[0];
-    // todo: проверка на тип данных!
+    switch (state.type) {
+        case 'modules':
+            return newModuleModal(state, num);
+        case 'lessons':
+            return newLessonModal(state, num);
+        case 'lesson':
+            return newMarkModal(state, num);
+        case 'homework':
+            return newMarkModal(state, num);
+    }
     return newModuleModal(state, num)
 }

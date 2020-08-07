@@ -5,7 +5,7 @@ export function searchUpdate(state, e, type) {
     return {
         tableData : {
             ...state.tableData,
-            elements: Storage.generateSelection(type, search),
+            elements: Storage.generateSelection(type, search, state.page),
             allChecked: false
         },
         searchText: search,

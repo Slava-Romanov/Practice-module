@@ -14,6 +14,41 @@ input:focus {
     text-align: center;
     box-sizing: border-box;
 }
+ /*need mixin*/
+.line_area {
+    width: 300px;
+    margin: 10px auto 10px auto;
+
+    border: 2px solid #C9C9C9;
+    border-radius: 12px;
+
+    background: #FCFBFB;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.line_area textarea {
+    background: none;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    width: 95%;
+}
+
+.line select {
+    width: 95%;
+    height: 100%;
+    -webkit-appearance: none;
+    outline: none;
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 .line input[type="text"] {
     height: 100%;

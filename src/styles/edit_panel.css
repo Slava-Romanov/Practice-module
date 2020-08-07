@@ -16,6 +16,8 @@
 
     transform: translateX(-50%);
     animation: upAnimationEP .3s 1 ease-in-out;
+
+    z-index: 2;
 }
 
 .edit_panel .grey_bg {

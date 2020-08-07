@@ -1,13 +1,6 @@
 import Storage from '../js/utils/data.js'
 
 document.addEventListener('DOMContentLoaded', function() {
-    // const modules = 5;
-    // const lessons_in_module = 20;
-    // const homework_in_module = 20;
-    // const max_marks_in_lesson = 70;
-    //
-    // const max_points_in_module = 10;
-
     const name_modules = ['Веб-верстка', 'JavaScript', 'Система контроля версий Git',
         'Онлайн сессии по Веб-разработке', 'Универсальные знания программиста'];
     const points_modules = [35, 35, 5, 15, 10];
@@ -24,11 +17,29 @@ document.addEventListener('DOMContentLoaded', function() {
         'Анимация в CSS', 'Создание блога на WordPress', 'Вёрстка писем'],
         ['Как стать первоклассным программистом и чем он отличается от кодера', 'Какими soft skills должен обладать программист',
         'Как общаться по почте и эффективно работать с ней', 'Карта развития для разработчиков',
-        'Data driven подход к продуктивности — инсайты из данных миллиона людей', 'Личный бренд разработчика',
-        'Вёрстка email-рассылок. Советы на реальных примерах'
+        'Data driven подход к продуктивности — инсайты из данных миллиона людей',
+        'Вёрстка email-рассылок. Советы на реальных примерах', 'Личный бренд разработчика'
         ]];
     const types = ['lec', 'sem', 'rk', 'ex'];
+    const types_v = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3];
 
+    const marks = [['Отлично', 9], ['Хорошо', 6], ['Требуется доработка', 3], ['Не сдано', 0]];
+    const marks_v = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3];
+
+    const homeworks = [['Тестовое задание', 'Верстка проекта', 'Одностраничный сайт', 'Адаптивная верстка', 'Разбиение проекта на модули'],
+        ['Тестовое задание', 'Клиент-серверное приложение', 'Сайт на React', 'Обращение с DOM', 'Параллельное программирование'],
+        ['Тестовое задание', 'Задачи на разрешение конфликтов'],
+        ['Анимация', 'Адаптивная верстка', 'Верстка с Bootstrap', 'Верстка с препроцессарами'],
+        ['Составление писем', 'Составление резюме', 'Верстка писем']];
+
+    const desc_hw = 'Для проверки и самопроверки вы должны выполнить очень простое задание,' +
+        'за которое мы поставим вам целых пять баллов. Условие задания находится в репозитории на гитхабе,' +
+        'а список вариантов в этой таблице. В этом задании проверяются ваши навыки работы с гитом и базовые знания JavaScript. ';
+
+    const desc_lesson = '- Работа браузера, связь и взаимодействие HTML, CSS и JS в браузере;<br/>' +
+        '- DOM и браузерные события. Структура SPA (Single Page Application);<br/>' +
+        '- Основы HTTP, методы HTTP;<br/>' +
+        '- Организация работы с сетью из браузера. Авторизация с использованием cookies.';
     Storage.init();
 
     // Создание модулей
@@ -39,20 +50,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Создание занятий
     for(let i = 0; i < name_lessons.length; i++) {
         for(let j = 0; j < name_lessons[i].length; j++) {
-            Storage.createLesson(name_lessons[i][j], randomElement(types),
-                ('Описание ' + j + ' ').repeat(10), i)
+            Storage.createLesson(name_lessons[i][j], types[randomElement(types_v)], desc_lesson, i);
         }
     }
 
     // Создание дз
     for(let i = 0; i < name_lessons.length; i++) {
-        let num_hw = 1;
+        let num_hw = 0;
         for (let j = 0; j < name_lessons[i].length; j++) {
-            if (randomNum(2)) {
+            if (randomNum(2) && homeworks[i].length !== num_hw) {
                 const start_lesson = i + '_' + j;
                 const end_lesson = i + '_' + (j + randomNum(name_lessons[i].length - j));
-                Storage.createHomework('ДЗ ' + num_hw,
-                                            ('Описание ' + num_hw + ' ').repeat(10),
+                Storage.createHomework(homeworks[i][num_hw],
+                                            desc_hw,
                                             start_lesson,
                                             end_lesson,
                                             randomDate(new Date(2020, 0, 1), new Date()));
@@ -61,33 +71,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // data.marks_lesson = [];
-    // for (let i = 0; i < modules; i++) {
-    //     for (let j = 0; j < lessons_modules[i]; j++) {
-    //         const marks = Math.floor(max_marks_in_lesson * Math.random());
-    //         for (let k = 0; k < marks; k++) {
-    //             data.marks_lesson.push({
-    //                 name: 'Оценка ' + k,
-    //                 mark: Math.floor(100 * Math.random()) + 1,
-    //                 lesson_id: i + '_' + j
-    //             });
-    //         }
-    //     }
-    // }
+    // Создание оценок занятиям
+    for(let i = 0; i < name_lessons.length; i++) {
+        for(let j = 0; j < name_lessons[i].length; j++) {
+            const num = randomNum(100);
+            for(let k = 0; k < num; k++) {
+                const mark = marks[randomElement(marks_v)];
+                Storage.createMarkLesson(mark[0], mark[1] + randomNum(3), i, j);
+            }
+        }
+    }
 
-    // data.marks_homework = [];
-    // for (let i = 0; i < modules; i++) {
-    //     for (let j = 0; j < homework_in_module; j++) {
-    //         const marks = Math.floor(max_marks_in_lesson * Math.random());
-    //         for (let k = 0; k < marks; k++) {
-    //             data.marks_homework.push({
-    //                 name: 'Оценка ' + k,
-    //                 mark: Math.floor(100 * Math.random()) + 1,
-    //                 lesson_id: i + '_' + j
-    //             });
-    //         }
-    //     }
-    // }
+    // Создание оценок дз
+    for(let i = 0; i < Storage.getHomeworks().length; i++) {
+        const num = randomNum(100);
+        for(let k = 0; k < num; k++) {
+            const mark = marks[randomElement(marks_v)];
+            Storage.createMarkHomework(mark[0], mark[1] + randomNum(3), i);
+        }
+    }
 
     const jsonData = JSON.stringify(Storage.getStore());
     download(jsonData, 'data.json', 'text/plain');
@@ -111,15 +113,4 @@ function randomElement(arr) {
 
 function randomNum(num) {
     return Math.floor((num) * Math.random());
-}
-
-
-function get_random_lesson(data, module_id) {
-    let rand = Math.floor((data.lessons[module_id].length - 3) * Math.random());
-
-    // console.log(rand);
-    // while (data.lessons[module_id][rand].module != module_id) {
-    //     rand = Math.floor((data.lessons.length - 3) * Math.random());
-    // }
-    return rand;
 }

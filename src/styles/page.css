@@ -1,6 +1,6 @@
 .page {
     max-width: 980px;
-    margin: 40px auto auto auto;
+    margin: 40px auto 40px auto;
     padding: 2px;
 
     background: #EFEFEF;
@@ -16,7 +16,7 @@
 }
 
 .top_block {
-    display: flex;
+    /*display: flex;*/
     /*flex-direction: row;*/
-    align-items: center;
+    /*align-items: center;*/
 }

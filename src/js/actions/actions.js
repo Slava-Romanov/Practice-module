@@ -8,14 +8,30 @@ const actions = {
 
     deleteElementModal: (state, type) => modalActions.deleteElementModal(state, type),
     newModuleModal: (state, num) => modalActions.newModuleModal(state, num),
+    newLessonModal: (state, num) => modalActions.newLessonModal(state, num),
+    newHomeworkModal: (state, num) => modalActions.newHomeworkModal(state, num),
+    newMarkModal: (state, num) => modalActions.newMarkModal(state, num),
+
     closeModal: (state, modal) => modalActions.closeModal(state, modal),
     addModule: (state, e, num) => modalActions.addModule(state, num),
+    addLesson: (state, e, num) => modalActions.addLesson(state, num),
+    addHomework: (state, e, num) => modalActions.addHomework(state, num),
+    addMark: (state, e, num) => modalActions.addMark(state, num),
     onInputNewModuleModal: (state, e) => modalActions.onInputNewModuleModal(state, e),
+    onInputNewLessonModal: (state, e) => modalActions.onInputNewLessonModal(state, e),
+    onInputNewHomeworkModal: (state, e) => modalActions.onInputNewHomeworkModal(state, e),
+    onInputNewMarkModal: (state, e) => modalActions.onInputNewMarkModal(state, e),
     getKey: (state, e) => modalActions.getKey(state, e),
 
+    deleteOneLesson: (state) => modalActions.deleteOneLesson(state),
+    deleteOneHomework: (state) => modalActions.deleteOneHomework(state),
     deleteModulesModal: (state, e) => modalActions.deleteModulesModal(state, e),
+    deleteLessonsModal: (state, e) => modalActions.deleteLessonsModal(state, e),
+    deleteOneLessonModal: (state) => modalActions.deleteOneLessonModal(state),
+    deleteOneHomeworkModal: (state) => modalActions.deleteOneHomeworkModal(state),
+    deleteMarksModal: (state, e) => modalActions.deleteMarksModal(state, e),
 
-    initTableData: (state, type) => tableActions.initTableData(state, type),
+    initTableData: (state, type, page = null) => tableActions.initTableData(state, type, page),
     clickCheckbox: (state, e, index) => tableActions.clickCheckbox(state, e, index),
     clickAllCheckbox: (state) => tableActions.clickAllCheckbox(state),
 

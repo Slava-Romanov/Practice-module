@@ -8,8 +8,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'public'),
-    filename: '[name].js'//,//.[contenthash]
-    //publicPath: '/'
+    filename: '[name].js',//,//.[contenthash]
+    publicPath: '/'
   },
   resolve: {
     alias: {
@@ -48,9 +48,10 @@ module.exports = {
         test: /\.(png|ico|svg|jpe?g|gif)$/i,
         loader: 'file-loader',
         options: {
+          context: 'src',
           name(resourcePath, resourceQuery) {
-              return 'images/' + '[name].[ext]';
-            //[contenthash].[ext]
+              return '[path][name].[ext]';
+              //[contenthash].[ext]
           },
         },
       },

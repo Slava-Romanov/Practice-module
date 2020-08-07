@@ -1,11 +1,21 @@
 import Storage from "../utils/data";
 
-export function initTableData(state, type) {
+export function initTableData(state, type, page = null) {
+    Storage.tmp.prevCheck = -1;
     return {
+        type: type,
+        searchText: '',
+        page : {
+            ...state.page,
+            ...page
+        },
         tableData: {
             ...state.tableData,
-            elements: Storage.generateSelection(type, ''),
+            elements: Storage.generateSelection(type, '', page),
             allChecked: false
+        },
+        editPanel: {
+            isOpen: null
         }
     };
 }
@@ -54,6 +64,9 @@ export function clickCheckbox(state, e, indexCheck) {
 }
 
 export function clickAllCheckbox(state) {
+    if (state.tableData.elements.length === 0) {
+        return null;
+    }
     const allCheck = state.tableData.allChecked ^ true;
     let data = {
         tableData: {

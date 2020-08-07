@@ -1,12 +1,15 @@
 import {h, Component, render, Fragment} from 'preact';
+import {Link} from 'preact-router/match';
 import {connect} from 'redux-zero/preact';
 
 import actions from '../actions/actions';
 
+import Note_hw from './elements/note_hw'
 import Storage from '../utils/data';
-import editIcon from '../../images/editIcon.svg';
+import editIcon from '../../images/penIcon.svg';
+import findIcon from "../../images/top/findIcon.svg";
 
-const mapToProps = ({tableData, searchText}) => ({tableData, searchText});
+const mapToProps = ({type, page, tableData, searchText}) => ({type, page, tableData, searchText});
 
 class Table extends Component {
     constructor(props) {
@@ -21,18 +24,26 @@ class Table extends Component {
                 this.label = 'Таблица модулей дисциплины';
                 break;
             case 'lessons':
+                this.label = 'Таблица занятий, модуль: "' + Storage.getModuleByID(props.page.moduleID).name + '"';
                 break;
-            case 'homeworks':
+            case 'lesson':
+                this.label = 'Таблица оценок занятия';
+                /*, занятие: "' + Storage.getLessonByID(props.page.moduleID, props.page.lessonID).name
+                + '", модуль: "' + Storage.getModuleByID(props.page.moduleID).name + '"';*/
+                break;
+            case 'homework':
+                this.label = 'Таблица оценок домашнего задания';
+                /*, домашнее задание: "' + Storage.getHomeworkByID(props.page.homeworkID).name + '"';*/
                 break;
         }
     }
 
     componentDidMount() {
-        document.addEventListener('keydown', e => this.props.getKey(e));
+        document.addEventListener('keydown', this.props.getKey);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keydown', e => this.props.getKey(e));
+        document.removeEventListener('keydown', this.props.getKey);
     }
 
     fillSearch(name, search) {
@@ -57,45 +68,203 @@ class Table extends Component {
     };
 
     render() {
-        return <Fragment>
-            <h1>{this.label}</h1>
-            <table name='modules'>
-                <tr>
-                    <th onClick={(e) => this.props.clickAllCheckbox(e)}>
-                        <input type='checkbox' checked={this.props.tableData.allChecked}/>
-                    </th>
-                    <th>№</th>
-                    <th>Название</th>
-                    <th>Занятий</th>
-                    <th>Баллы</th>
-                    <th></th>
-                </tr>
-                {
-                    this.props.tableData.elements.map((el, index) => (
-                        <tr data-index={index} data-num={el.num} className={el.checked ? 'checked' : null}>
-                            <td onClick={(e) => this.props.clickCheckbox(e, index)}>
-                                <input type='checkbox' id={'check_' + index} checked={el.checked}/>
-                            </td>
-                            <td>
-                                {Number(el.num) + 1}
-                            </td>
-                            <td>
-                                {this.fillSearch(el.name, this.props.searchText)}
-                            </td>
-                            <td>
-                                {Storage.getCountModuleLessons(el.num)}
-                            </td>
-                            <td>
-                                {el.max_points}
-                            </td>
-                            <td onClick={() => this.props.newModuleModal(el.num)}>
-                                <img src={editIcon}/>
-                            </td>
+        switch (this.props.type) {
+            case 'modules':
+                return <Fragment>
+                    <div className='title-table'>{this.label}</div>
+                    <table name='modules'>
+                        <tr>
+                            <th onClick={(e) => this.props.clickAllCheckbox(e)}
+                                disabled={this.props.tableData.elements.length <= 0}>
+                                <input type='checkbox' checked={this.props.tableData.allChecked}
+                                       disabled={this.props.tableData.elements.length <= 0}/>
+                            </th>
+                            <th>№</th>
+                            <th>Название</th>
+                            <th>Занятий</th>
+                            <th>Баллы</th>
+                            <th></th>
                         </tr>
-                    ))
-                }
-            </table>
-        </Fragment>;
+                        {
+                            this.props.tableData.elements.map((el, index) => (
+                                <tr data-index={index} data-num={el.num} className={el.checked ? 'checked' : null}>
+                                    <td onClick={(e) => this.props.clickCheckbox(e, index)}>
+                                        <input type='checkbox' id={'check_' + index} checked={el.checked}/>
+                                    </td>
+                                    <td>
+                                        {Number(el.num) + 1}
+                                    </td>
+                                    <td>
+                                        <Link activeClassName="active" href={"/module/" + el.num}>
+                                            {this.fillSearch(el.name, this.props.searchText)}
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        {Storage.getCountModuleLessons(el.num)}
+                                    </td>
+                                    <td>
+                                        {el.max_points}
+                                    </td>
+                                    <td onClick={() => this.props.newModuleModal(el.num)}>
+                                        <img src={editIcon}/>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </table>
+                </Fragment>;
+            case 'lessons':
+                return <Fragment>
+                    <div className='title-table'>{this.label}<Note_hw/></div>
+                    <table name='lessons'>
+                        <tr>
+                            <th onClick={(e) => this.props.clickAllCheckbox(e)}
+                                disabled={this.props.tableData.elements.length <= 0}>
+                                <input type='checkbox' checked={this.props.tableData.allChecked}
+                                       disabled={this.props.tableData.elements.length <= 0}/>
+                            </th>
+                            <th>№</th>
+                            <th>Название</th>
+                            <th>Тип занятия</th>
+                            <th>ДЗ</th>
+                            <th></th>
+                        </tr>
+                        {
+                            this.props.tableData.elements.map((el, index) => (
+                                <tr data-index={index} data-num={el.num} className={el.checked ? 'checked' : null}>
+                                    <td onClick={(e) => this.props.clickCheckbox(e, index)}>
+                                        <input type='checkbox' id={'check_' + index} checked={el.checked}/>
+                                    </td>
+                                    <td>
+                                        {Number(el.num) + 1}
+                                    </td>
+                                    <td>
+                                        <Link activeClassName="active"
+                                              href={"/module/" + this.props.page.moduleID + "/lesson/" + el.num}>
+                                            {this.fillSearch(el.name, this.props.searchText)}
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <div className={el.type}>{Storage.typesHomeworkNames[el.type]}</div>
+                                    </td>
+                                    <td>
+                                        {
+                                            Storage.getHomeworkByLessonID(el.num, this.props.page.moduleID).map((el2) => (
+                                                el2.start_hw ?
+                                                    <Link activeClassName="active" href={"/homework/" + el2.num}>
+                                                        <div className='hw_s hw'>{el2.name}</div>
+                                                    </Link>
+                                                    : <Link activeClassName="active" href={"/homework/" + el2.num}>
+                                                        <div className='hw_e hw'>{el2.name}</div>
+                                                    </Link>
+                                            ))
+                                        }
+                                    </td>
+                                    <td onClick={() => this.props.newLessonModal(el.num)}>
+                                        <img src={editIcon}/>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </table>
+                </Fragment>;
+            case 'lesson':
+                return <Fragment>
+                    <div className='table'>
+                        <div className='title-table'>{this.label}</div>
+                        <div className='search'>
+                            <img src={findIcon}/>
+                            <input className='search_input' id='search_main_input' type='text'
+                                   autoComplete='off' onInput={e => this.props.searchUpdate(e, this.props.type)}
+                                   value={this.props.searchText}>
+                            </input>
+                        </div>
+                        <table name='marks'>
+                            <tr>
+                                <th onClick={(e) => this.props.clickAllCheckbox(e)}
+                                    disabled={this.props.tableData.elements.length <= 0}>
+                                    <input type='checkbox' checked={this.props.tableData.allChecked}
+                                           disabled={this.props.tableData.elements.length <= 0}/>
+                                </th>
+                                <th>№</th>
+                                <th>Комментарий</th>
+                                <th>Оценка</th>
+                                <th></th>
+                            </tr>
+                            {
+                                this.props.tableData.elements.map((el, index) => (
+                                    <tr data-index={index} data-num={el.num} className={el.checked ? 'checked' : null}>
+                                        <td onClick={(e) => this.props.clickCheckbox(e, index)}>
+                                            <input type='checkbox' id={'check_' + index} checked={el.checked}/>
+                                        </td>
+                                        <td>
+                                            {Number(el.num) + 1}
+                                        </td>
+                                        <td>
+                                            {this.fillSearch(el.name, this.props.searchText)}
+                                        </td>
+                                        <td>
+                                            {el.points}
+                                        </td>
+                                        <td onClick={() => this.props.newMarkModal(el.num)}>
+                                            <img src={editIcon}/>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </table>
+                    </div>
+                </Fragment>;
+            case 'homework':
+                return <Fragment>
+                    <div className='table'>
+                        <div className='title-table'>{this.label}</div>
+                        <div className='search'>
+                            <img src={findIcon}/>
+                            <input className='search_input' id='search_main_input' type='text'
+                                   autoComplete='off' onInput={e => this.props.searchUpdate(e, this.props.type)}
+                                   value={this.props.searchText}>
+                            </input>
+                        </div>
+                        <table name='marks'>
+                            <tr>
+                                <th onClick={(e) => this.props.clickAllCheckbox(e)}
+                                    disabled={this.props.tableData.elements.length <= 0}>
+                                    <input type='checkbox' checked={this.props.tableData.allChecked}
+                                           disabled={this.props.tableData.elements.length <= 0}/>
+                                </th>
+                                <th>№</th>
+                                <th>Комментарий</th>
+                                <th>Оценка</th>
+                                <th></th>
+                            </tr>
+                            {
+                                this.props.tableData.elements.map((el, index) => (
+                                    <tr data-index={index} data-num={el.num} className={el.checked ? 'checked' : null}>
+                                        <td onClick={(e) => this.props.clickCheckbox(e, index)}>
+                                            <input type='checkbox' id={'check_' + index} checked={el.checked}/>
+                                        </td>
+                                        <td>
+                                            {Number(el.num) + 1}
+                                        </td>
+                                        <td>
+                                            {this.fillSearch(el.name, this.props.searchText)}
+                                        </td>
+                                        <td>
+                                            {el.points}
+                                        </td>
+                                        <td onClick={() => this.props.newMarkModal(el.num)}>
+                                            <img src={editIcon}/>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </table>
+                    </div>
+                </Fragment>;
+            default:
+                return '';
+        }
     }
 }
 

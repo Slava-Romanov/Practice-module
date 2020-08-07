@@ -2,7 +2,9 @@ import createStore from 'redux-zero';
 import {initModals} from "../actions/modal";
 
 const initialState = {
-    searchText: '',
+    type : '',
+    searchText : '',
+    page : { },
     tableData : { },
     editPanel : { },
     modal : {

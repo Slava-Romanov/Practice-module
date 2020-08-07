@@ -6,10 +6,12 @@ import actions from '../actions/actions';
 import Top from './top';
 import Table from './table';
 
-class modulesPage extends Component {
+class lessonPage extends Component {
     constructor(props) {
         super();
-        props.initTableData('modules');
+        props.initTableData('lesson', {
+            homeworkID: null, moduleID: props.moduleID, lessonID: props.lessonID
+        });
     }
 
     render() {
@@ -26,4 +28,4 @@ class modulesPage extends Component {
     }
 }
 
-export default connect(null, actions)(modulesPage);
+export default connect(null, actions)(lessonPage);

@@ -3,13 +3,13 @@ import {connect} from "redux-zero/preact";
 
 import actions from "../actions/actions";
 
-import closeIcon from "../../images/closeIcon.svg";
-import upIcon from "../../images/upIcon.svg";
-import downIcon from "../../images/downIcon.svg";
-import penIcon from "../../images/penIcon.svg";
-import trashIcon from "../../images/trashIcon.svg";
+import closeIcon from "../../images/panel/closeIcon.svg";
+import upIcon from "../../images/panel/upIcon.svg";
+import downIcon from "../../images/panel/downIcon.svg";
+import penIcon from "../../images/panel/penIcon.svg";
+import trashIcon from "../../images/panel/trashIcon.svg";
 
-const mapToProps = ({editPanel}) => ({editPanel});
+const mapToProps = ({type, editPanel}) => ({type, editPanel});
 
 class EditPanel extends Component {
     constructor() {
