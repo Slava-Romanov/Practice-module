@@ -1,0 +1,100 @@
+@import 'variables'
+
+.modal
+    position: fixed
+    top: 0
+    left: 0
+
+    width: 100%
+    height: 100%
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    -webkit-overflow-scrolling: touch
+    z-index: 3
+    animation: visibleAnimation .3s 1 ease-out
+
+.modal .window
+    position: relative
+    min-width: 280px
+    max-height: 90vh
+    height: auto
+    max-width: 380px
+    overflow-y: scroll
+    -ms-overflow-style: none
+
+    background: $color-white
+    border-radius: 10px
+
+    margin: 10px
+    padding: 20px
+    flex: 1
+
+    text-align: center
+    z-index: 3
+
+.modal .window .line, .modal .window .line_area, .modal .window .standard_btn, .modal .window a
+    width: 100%
+    max-width: 300px
+
+.modal .window .title, .modal .window .title_info
+     font-size: 18px
+     font-weight: bold
+     margin: 10px
+
+.modal .window .title_info
+    margin-top: 30px
+    margin-bottom: 40px
+
+.modal .window .mini_title
+    font-size: 14px
+    margin: 10px
+
+
+.modal .window a
+    text-decoration: none
+
+.modal .background
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: $color-modal-background
+
+.modal .standard_btn
+    margin: 10px auto 10px auto
+
+.modal .choice .standard_btn:first-child
+    margin-right: 10px
+
+.modal .choice .standard_btn
+    display: inline-block
+    max-width: 145px
+    width: 45%
+
+.modal .window .close
+    position: absolute
+    top: 15px
+    right: 15px
+    cursor: pointer
+    opacity: 0.7
+
+.modal .window .close img
+    width: 15px
+
+.modal .window .close:hover
+    opacity: 1
+
+.modal .window .err
+    width: 280px
+    margin: -10px auto auto auto
+
+    text-align: left
+    color: red
+    font-size: 10px
+
+.modal .window .center
+    text-align: center

@@ -1,0 +1,94 @@
+@import 'variables'
+
+@mixin line-properties
+    width: 300px
+    margin: 10px auto 10px auto
+
+    border: 2px solid $color-line-border
+    border-radius: 12px
+
+    background: $color-line-area
+    text-align: center
+    box-sizing: border-box
+
+input:focus
+    outline: none
+
+.line
+    height: 40px
+    @include line-properties
+
+.line_area
+    @include line-properties
+
+.line_area textarea
+    background: none
+    border: none
+    outline: none
+    resize: none
+    font-size: 13px
+    font-weight: 600
+    font-family: inherit
+    width: 95%
+
+.line select
+    width: 95%
+    height: 100%
+    appearance: none
+    outline: none
+    background: none
+    border: none
+    font-size: 13px
+    font-weight: bold
+    cursor: pointer
+
+.line input[type="text"]
+    height: 100%
+    width: 95%
+
+    border: none
+    background: none
+
+    font-size: 13px
+    font-weight: bold
+    appearance: none
+
+input[type="submit"]
+    appearance: none
+
+input[type="text"]
+    flex: 1 0 auto
+    width: auto
+    height: 100%
+
+    font-size: 13px
+    font-weight: normal
+
+    border: none
+    background: none
+
+    appearance: none
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none)
+    input[type='checkbox']
+        appearance: none
+        height: 21px
+        width: 21px
+        position: relative
+        margin: 0
+        cursor: pointer
+        border: 1px solid $color-checkbox-border
+        background: $color-checkbox-area
+        border-radius: 3px
+        transition: background .3s, border-color .3s
+
+    input[type='checkbox']:checked
+        background: $color-checkbox-area-checked
+        border: 1px solid $color-checkbox-border-checked
+
+    input[type='checkbox']:disabled
+        cursor: not-allowed
+        opacity: .5
+
+    input[type='checkbox']:hover:not(:disabled)
+        border: 1px solid $color-checkbox-border-hover

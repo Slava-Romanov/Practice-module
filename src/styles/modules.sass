@@ -1,0 +1,52 @@
+table[name='modules'] td:nth-child(3)
+    text-decoration: underline
+    cursor: pointer
+
+table[name='modules'] th:nth-child(-n+2)
+    width: 35px
+
+table[name='modules'] th:nth-child(1):not([disabled])
+    cursor: pointer
+
+table[name='modules'] td:nth-child(1)
+    cursor: pointer
+
+table[name='modules'] th:nth-child(4), table[name='modules'] th:nth-child(5)
+    width: 100px
+
+table[name='modules'] td:nth-child(4), table[name='modules'] td:nth-child(5)
+    white-space: nowrap
+    overflow: hidden
+
+table[name='modules'] th:nth-child(6)
+    width: 20px
+
+table[name='modules'] td:nth-child(6)
+    cursor: pointer
+    opacity: 0.7
+
+table[name='modules'] td:nth-child(6):hover
+    opacity: 1
+
+@media (max-width: 680px)
+    table[name='modules'] th:nth-child(1)
+        width: 10px
+
+    table[name='modules'] th:nth-child(2)
+        width: 10px
+
+    table[name='modules'] th:nth-child(4)
+        width: 30px
+
+    table[name='modules'] th:nth-child(5)
+        width: 20px
+
+    table[name='modules'] th:nth-child(6)
+        width: 10px
+
+@media (max-width: 400px)
+    table[name='modules'] th:nth-child(-n+6)
+        font-size: 10px
+
+    table[name='modules'] td:nth-child(-n+6)
+        font-size: 10px

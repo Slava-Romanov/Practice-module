@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  mode: 'production', //mode: 'development',
+  mode: 'development', //mode: 'development','production'
   entry: {
     bundle: ['whatwg-fetch', path.join(__dirname, '/src/js/index.js')]
   },
@@ -22,7 +22,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(css)$/,
+        test: /\.(sa|sc|c)ss$/i,
         use: [
           {
             loader: 'style-loader',
@@ -39,6 +39,9 @@ module.exports = {
           },
           {
             loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
           }
         ]
       },

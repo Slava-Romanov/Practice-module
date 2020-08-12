@@ -1,18 +1,18 @@
-@import './styles/index.css';
+@import 'styles/index.sass';
 
-@import './styles/animations.css';
-@import './styles/buttons.css';
-@import './styles/input.css';
+@import 'styles/animations.sass';
+@import 'styles/buttons.sass';
+@import 'styles/input.sass';
 
-@import './styles/page.css';
-@import './styles/modal.css';
+@import 'styles/page.sass';
+@import 'styles/modal.sass';
 
-@import './styles/search.css';
-@import './styles/edit_panel.css';
+@import 'styles/search.sass';
+@import 'styles/edit_panel.sass';
 
-@import './styles/modules.css';
-@import './styles/lessons.css';
-@import './styles/marks.css';
-@import './styles/table.css';
-@import './styles/color_elements.css';
-@import './styles/top.css';
+@import 'styles/modules.sass';
+@import 'styles/lessons.sass';
+@import 'styles/marks.sass';
+@import 'styles/table.sass';
+@import 'styles/color_elements.sass';
+@import 'styles/top.sass';

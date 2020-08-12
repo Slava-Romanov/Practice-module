@@ -1,5 +1,5 @@
-export const dataFileUrl = './data.json';
-export const routerUrl = '/practice/'; // /practice/
+export const dataFileUrl = '/data.json';
+export const routerUrl = '/'; // /practice/
 
 class Storage {
     constructor() {
