@@ -51,14 +51,14 @@ table tr.checked {
 }
 
 table tr {
-    -webkit-transition: background .3s, border-color .3s;
+    /*-webkit-transition: background .3s, border-color .3s;*/
     transition: background .3s, border-color .3s;
     border-color: white;
     border-left: 3px solid white;
 }
 
-table th {
-    position: -webkit-sticky;
+table tr:first-child {
+    /*position: -webkit-sticky;*/
     position: sticky;
     top: 0;
     z-index: 1;
@@ -96,7 +96,7 @@ span.yellow {
         border-left: 0;
         left: 6px;
         top: 3px;
-        -webkit-transform: rotate(43deg);
+        /*-webkit-transform: rotate(43deg);*/
         transform: rotate(43deg);
     }
 

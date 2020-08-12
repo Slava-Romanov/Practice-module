@@ -6,6 +6,11 @@ import Storage from "./utils/data";
 
 import { dataFileUrl } from "./utils/data";
 
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
+//import 'whatwg-fetch'
+//window.
 fetch(dataFileUrl).then((response) => {
     return response.json();
 }).then((data) => {

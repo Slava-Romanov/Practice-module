@@ -18,6 +18,7 @@ class EditPanel extends Component {
 
     render(props) {
         return this.props.editPanel.isOpen && <Fragment>
+            <div className='edit_panel_p'>
             <div className='edit_panel'>
                 <button className='ep_btn grey_bg' onClick={() => this.props.removeSelection()}>
                     <img src={closeIcon}/>Снять выделение
@@ -37,6 +38,7 @@ class EditPanel extends Component {
                 <button className='ep_btn red_bg' onClick={() => this.props.deleteElementModal(this.props.type)}>
                     <img src={trashIcon}/> Удалить
                 </button>
+            </div>
             </div>
         </Fragment>;
     }

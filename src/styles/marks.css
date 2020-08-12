@@ -1,10 +1,19 @@
+.table_parent {
+    text-align: center;
+}
+
 .table {
     margin: auto;
-    width: max-content;
+    /*width: max-content;*/
+    display: inline-block;
 }
 
 table[name='marks'] {
     width: auto;
+}
+
+.table .title-table {
+    text-align: left;
 }
 
 .table .search {
@@ -87,6 +96,10 @@ table[name='marks'] td:nth-child(5):hover {
     }
     table[name='marks'] th:nth-child(3) {
         width: auto;
+    }
+
+    table[name='marks'] th:nth-child(4) {
+        width: 50px;
     }
 
     table[name='marks'] .lec, table[name='marks'] .sem, table[name='marks']  .rk,

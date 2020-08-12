@@ -1,5 +1,28 @@
 {
   "plugins": [
     ["@babel/plugin-transform-react-jsx", { "pragma": "h" }]
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": "^3.6.5"
+      }
+    ]
   ]
+  /*
+   "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": [
+          "> 0.25%, not dead",
+          "ios >= 8",
+          "last 10 version",
+          "ie >= 10"
+        ]
+      }
+    }]
+  ]
+  */
 }

@@ -172,6 +172,7 @@ class Table extends Component {
                 </Fragment>;
             case 'lesson':
                 return <Fragment>
+                    <div className='table_parent'>
                     <div className='table'>
                         <div className='title-table'>{this.label}</div>
                         <div className='search'>
@@ -216,9 +217,11 @@ class Table extends Component {
                             }
                         </table>
                     </div>
+                    </div>
                 </Fragment>;
             case 'homework':
                 return <Fragment>
+                    <div className='table_parent'>
                     <div className='table'>
                         <div className='title-table'>{this.label}</div>
                         <div className='search'>
@@ -262,6 +265,7 @@ class Table extends Component {
                                 ))
                             }
                         </table>
+                    </div>
                     </div>
                 </Fragment>;
             default:

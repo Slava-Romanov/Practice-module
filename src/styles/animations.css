@@ -1,10 +1,10 @@
 @keyframes upAnimationEP {
     from {
         opacity: 0;
-        transform: translate(-50%, 100%); }
+        transform: translateY(100%); }
     to {
         opacity: 1;
-        transform: translate(-50%, 0%); }
+        transform: translateY(0%); }
 }
 
 @keyframes visibleAnimation {

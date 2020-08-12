@@ -4,7 +4,6 @@ button:focus {
 
 button {
     touch-action: manipulation;
-    -webkit-appearance: none;
 }
 
 .top_btn {
@@ -76,6 +75,21 @@ button {
     height: 14px;
     margin-right: 5px;
 }
+
+/*.ie9 .ep_btn img[src$=".svg"] {*/
+/*    max-height: 14px;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*}*/
+
+/*@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {*/
+/*    .ie9 .ep_btn img[src$=".svg"] {*/
+/*        max-height: 14px;*/
+/*        height: 100%;*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/
+
 
 .grey_bg {
     background: #939393;

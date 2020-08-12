@@ -10,25 +10,36 @@
     align-items: center;
     justify-content: center;
 
+    -webkit-overflow-scrolling: touch;
     z-index: 3;
+    animation: visibleAnimation .3s 1 ease-out;
 }
 
 .modal .window {
     position: relative;
-    width: 500px;
+    min-width: 280px;
+    max-height: 90vh;
     height: auto;
     max-width: 380px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
 
     background: #FFFFFF;
     border-radius: 10px;
 
     margin: 10px;
     padding: 20px;
-    /*flex: 1;*/
+    flex: 1;
+    /*box-sizing: border-box;*/
 
     text-align: center;
-    animation: visibleAnimation .5s 1 ease-in-out;
+    /*animation: visibleAnimation .5s 1 ease-out;*/
     z-index: 3;
+}
+
+.modal .window .line, .modal .window .line_area, .modal .window .standard_btn, .modal .window a {
+    width: 100%;
+    max-width: 300px;
 }
 
 .modal .window .title, .modal .window .title_info {
@@ -59,7 +70,7 @@
     height: 100%;
 
     background: rgba(0,0,0,0.3);
-    animation: visibleAnimation .5s 1 ease-in-out;
+    /*animation: visibleAnimation .5s 1 ease-out;*/
 }
 
 .modal .standard_btn {
@@ -72,7 +83,8 @@
 
 .modal .choice .standard_btn {
     display: inline-block;
-    width: 145px;
+    max-width: 145px;
+    width: 45%;
 }
 
 .modal .window .close {

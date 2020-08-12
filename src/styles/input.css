@@ -41,7 +41,8 @@ input:focus {
 .line select {
     width: 95%;
     height: 100%;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
+    appearance: none;
     outline: none;
     background: none;
     border: none;
@@ -60,7 +61,11 @@ input:focus {
     font-size: 13px;
     font-weight: bold;
     appearance: none;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
+}
+
+input[type="submit"] {
+    appearance: none;
 }
 
 input[type="text"] {
@@ -75,13 +80,13 @@ input[type="text"] {
     background: none;
 
     appearance: none;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
 }
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
     input[type='checkbox'] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
+        appearance: none;
+        /*-webkit-appearance: none;*/
         height: 21px;
         width: 21px;
         position: relative;
@@ -90,7 +95,7 @@ input[type="text"] {
         border: 1px solid #BBC1E1;
         background: #fff;
         border-radius: 3px;
-        -webkit-transition: background .3s, border-color .3s;
+        /*-webkit-transition: background .3s, border-color .3s;*/
         transition: background .3s, border-color .3s;
     }
     input[type='checkbox']:checked {

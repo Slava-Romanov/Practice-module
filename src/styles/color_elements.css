@@ -68,7 +68,7 @@
 
     white-space: nowrap;
     overflow: hidden;
-    width: max-content;
+    /*width: max-content;*/
     margin: auto;
 
     /*overflow-wrap: break-word;*/

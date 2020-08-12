@@ -1,10 +1,12 @@
 const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production', //mode: 'development',
   entry: {
-    bundle: path.join(__dirname, '/src/js/index.js'),
+    bundle: ['whatwg-fetch', path.join(__dirname, '/src/js/index.js')]
   },
   output: {
     path: path.join(__dirname, 'public'),
@@ -31,8 +33,12 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              importLoaders: 1,
             }
+          },
+          {
+            loader: 'postcss-loader'
           }
         ]
       },
@@ -63,4 +69,28 @@ module.exports = {
       filename: 'index.html'
     }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          mangle: true,
+          output: {
+            comments: false,
+            beautify: false
+          },
+          compress: {
+            sequences: true,
+            dead_code: true,
+            conditionals: true,
+            booleans: true,
+            unused: true,
+            if_return: true,
+            join_vars: true,
+            drop_console: true
+          }
+        }
+      }),
+    ],
+  },
 };
