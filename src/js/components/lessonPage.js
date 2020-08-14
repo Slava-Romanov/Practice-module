@@ -5,13 +5,22 @@ import actions from '../actions/actions';
 
 import Top from './top';
 import Table from './table';
+import Storage, {routerUrl} from "../utils/data";
+import {route} from "preact-router";
 
 class lessonPage extends Component {
     constructor(props) {
         super();
-        props.initTableData('lesson', {
-            homeworkID: null, moduleID: props.moduleID, lessonID: props.lessonID
-        });
+        if (!Number.isInteger(Number(props.moduleID)) || !Number.isInteger(Number(props.lessonID)) ||
+            props.moduleID >= Storage.getModules().length ||
+            props.lessonID >= Storage.getLessonsByID(props.moduleID).length) {
+            route(routerUrl + '404', true);
+        } else {
+            props.initTableData('lesson', {
+                homeworkID: null, moduleID: props.moduleID, lessonID: props.lessonID
+            });
+            document.title = 'Занятие: ' + Storage.getLessonByID(props.moduleID, props.lessonID).name;
+        }
     }
 
     render() {

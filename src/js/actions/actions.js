@@ -2,9 +2,12 @@ import * as tableActions from './table';
 import * as editPanelActions from './editPanel';
 import * as topActions from './top';
 import * as modalActions from './modal';
+import * as error from './error'
 
 const actions = {
     searchUpdate: (state, e, type) => topActions.searchUpdate(state, e, type),
+    //clickLink: (state, e) => topActions.clickLink(state, e),
+    initError: (state) => error.initError(state),
 
     deleteElementModal: (state, type) => modalActions.deleteElementModal(state, type),
     newModuleModal: (state, num) => modalActions.newModuleModal(state, num),

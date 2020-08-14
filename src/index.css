@@ -16,3 +16,5 @@
 @import 'styles/table.sass';
 @import 'styles/color_elements.sass';
 @import 'styles/top.sass';
+
+@import 'styles/error.sass';

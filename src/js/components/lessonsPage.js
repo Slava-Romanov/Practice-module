@@ -5,13 +5,20 @@ import actions from '../actions/actions';
 
 import Top from './top';
 import Table from './table';
+import Storage, {routerUrl} from "../utils/data";
+import {route} from "preact-router";
 
 class lessonsPage extends Component {
     constructor(props) {
         super();
-        props.initTableData('lessons', {
-            moduleID: props.moduleID
-        });
+        if (!Number.isInteger(Number(props.moduleID)) || props.moduleID >= Storage.getModules().length) {
+            route(routerUrl + '404', true);
+        } else {
+            props.initTableData('lessons', {
+                moduleID: props.moduleID
+            });
+            document.title = 'Модуль: ' + Storage.getModuleByID(props.moduleID).name;
+        }
     }
 
     render() {

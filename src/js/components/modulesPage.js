@@ -12,6 +12,10 @@ class modulesPage extends Component {
         props.initTableData('modules');
     }
 
+    componentDidMount() {
+        document.title = 'Выбор модуля дисциплины';
+    }
+
     render() {
         return (
             <Fragment>

@@ -133,8 +133,12 @@ class Storage {
         this.store.marks_lesson[module_id].splice(lesson_id, 1);
 
         const homeworks = this.getHomeworkByLessonID(lesson_id, module_id);
+        //console.log(homeworks);
         for (let i = 0; i < homeworks.length; i++) {
-            if (homeworks[i].start_hw && homeworks[i].end === '') {
+            if (homeworks[i].start === homeworks[i].end) {
+                this.deleteHomeworkByID(homeworks[i].num);
+                i += 1;
+            } else if (homeworks[i].start_hw && homeworks[i].end === '') {
                 this.deleteHomeworkByID(homeworks[i].num);
                 //this.getHomeworkByID(homeworks[i].num).start = '';
             } else if (homeworks[i].start === '') {

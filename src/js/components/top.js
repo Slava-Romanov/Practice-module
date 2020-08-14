@@ -38,7 +38,7 @@ class Top extends Component {
         }
     }
 
-    add (arr, adding) {
+    add(arr, adding) {
         for (let i = 1; i <= arr.length; i += 2) {
             arr.splice(i, 0, adding);
         }
@@ -47,7 +47,7 @@ class Top extends Component {
     }
 
     render(props) {
-        this.initType(this.props);
+        this.initType(props);
         switch (this.props.type) {
             case 'modules':
                 return <Fragment>
@@ -135,12 +135,12 @@ class Top extends Component {
                         </div>
                     </div>
                     <div className='labels'>
-                        <Link activeClassName="active" href={routerUrl + "module/" + this.hw_start_module + "/lesson/" + this.hw_start_lesson}>
+                        {this.homework.start === ''? '':<Link activeClassName="active" href={routerUrl + "module/" + this.hw_start_module + "/lesson/" + this.hw_start_lesson}>
                             <div className='hw_s hw'>{Storage.getLessonByID(this.hw_start_module, this.hw_start_lesson).name}</div>
-                        </Link>
-                        <Link activeClassName="active" href={routerUrl + "module/" + this.hw_end_module + "/lesson/" + this.hw_end_lesson}>
+                        </Link>}
+                        {this.homework.end === ''? '':<Link activeClassName="active" href={routerUrl + "module/" + this.hw_end_module + "/lesson/" + this.hw_end_lesson}>
                             <div className='hw_e hw'>{Storage.getLessonByID(this.hw_end_module, this.hw_end_lesson).name}</div>
-                        </Link>
+                        </Link>}
                     </div>
                     <Note_hw/>
                     <div className='date'>

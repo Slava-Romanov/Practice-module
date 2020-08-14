@@ -1,7 +1,7 @@
 import {h, Component, render, Fragment} from 'preact';
 import {connect} from "redux-zero/preact";
 
-class Note_hw extends Component {
+class note_hw extends Component {
     constructor() {
         super();
     }
@@ -16,4 +16,4 @@ class Note_hw extends Component {
     }
 }
 
-export default connect(null, null)(Note_hw);
+export default connect(null, null)(note_hw);

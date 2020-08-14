@@ -16,8 +16,11 @@ import NewHomeworkModal from "./modals/newHomework";
 import NewMarkModal from "./modals/newMark";
 import InfoModal from "./modals/info";
 import ChoiceModal from "./modals/choice";
+import NotFoundPage from "./notFoundPage"
+import RouteNotFound from "./routeNotFound";
 
 import { routerUrl } from "../utils/data";
+import Navigation from "./elements/navigation";
 
 export default class App extends Component {
     render() {
@@ -31,6 +34,7 @@ export default class App extends Component {
                     <InfoModal/>
                     <ChoiceModal/>
                 </div>
+                <Navigation/>
                 <div className='page'>
                     <div className='page_content' id='content'>
                         <Router>
@@ -38,8 +42,8 @@ export default class App extends Component {
                         <LessonsPage path={routerUrl + "module/:moduleID"}/>
                         <LessonPage path={routerUrl + "module/:moduleID/lesson/:lessonID"}/>
                         <HomeworkPage path={routerUrl + "homework/:homeworkID"}/>
-                        <div default>Error 404
-                            </div>
+                        <NotFoundPage path={routerUrl + "404"}/>
+                        <RouteNotFound default/>
                         </Router>
                     </div>
                 </div>

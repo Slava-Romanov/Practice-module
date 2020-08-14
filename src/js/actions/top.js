@@ -1,4 +1,5 @@
 import Storage from "../utils/data";
+import { route } from 'preact-router';
 
 export function searchUpdate(state, e, type) {
     const search = e.currentTarget.value.toLowerCase();
@@ -15,3 +16,8 @@ export function searchUpdate(state, e, type) {
         }
     }
 }
+
+// export function clickLink(state, e) {
+//     e.preventDefault();
+//     route(e.currentTarget.pathname);
+// }

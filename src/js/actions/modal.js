@@ -108,6 +108,7 @@ export function deleteOneHomework(state) {
 
 export function deleteOneHomeworkModal(state) {
     const id = state.page.homeworkID;
+    //console.log(Storage.getHomeworkByID(id));
     route('/module/' + Storage.getHomeworkByID(id).start.split('_')[0]);
     Storage.deleteHomeworkByID(id);
     return {
