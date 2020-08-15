@@ -1,5 +1,5 @@
 import {h, Component, render, Fragment} from 'preact';
-import { route } from 'preact-router';
+import {route} from 'preact-router';
 
 import Storage from "../utils/data";
 import {countChecked, getChecked} from "./table";
@@ -20,8 +20,8 @@ export function deleteElementModal(state, type) {
             if (countChecked(state) > 1) {
                 data.modal.choiceModal.text = 'Вы действительно хотите удалить выбранные модули?';
             }
-            data.modal.choiceModal.add_text = [ ' Внимание! Вместе с удалением каждого модуля,',
-                <br />, 'удаляются связанные с ним занятия,', <br />, 'домашние задания и оценки'];
+            data.modal.choiceModal.add_text = [' Внимание! Вместе с удалением каждого модуля,',
+                <br/>, 'удаляются связанные с ним занятия,', <br/>, 'домашние задания и оценки'];
 
             data.modal.choiceModal.onClickYes = 'deleteModulesModal';
             break;
@@ -30,8 +30,8 @@ export function deleteElementModal(state, type) {
             if (countChecked(state) > 1) {
                 data.modal.choiceModal.text = 'Вы действительно хотите удалить выбранные занятия?';
             }
-            data.modal.choiceModal.add_text = [ ' Внимание! Вместе с удалением каждого занятия,',
-                <br />, 'удаляются связанные с ним оценки,', <br />, 'домашние задания и их оценки'];
+            data.modal.choiceModal.add_text = [' Внимание! Вместе с удалением каждого занятия,',
+                <br/>, 'удаляются связанные с ним оценки,', <br/>, 'домашние задания и их оценки'];
 
             data.modal.choiceModal.onClickYes = 'deleteLessonsModal';
             break;
@@ -66,9 +66,9 @@ export function deleteOneLesson(state) {
         },
     };
 
-    data.modal.choiceModal.text = ['Вы действительно хотите', <br />, 'удалить занятие?'];
-    data.modal.choiceModal.add_text = [ ' Внимание! Вместе с удалением занятия,',
-        <br/>, 'удаляются связанные с ним оценки,', <br />, 'домашние задания и их оценки'];
+    data.modal.choiceModal.text = ['Вы действительно хотите', <br/>, 'удалить занятие?'];
+    data.modal.choiceModal.add_text = [' Внимание! Вместе с удалением занятия,',
+        <br/>, 'удаляются связанные с ним оценки,', <br/>, 'домашние задания и их оценки'];
     data.modal.choiceModal.onClickYes = 'deleteOneLessonModal';
 
     return data;
@@ -98,8 +98,8 @@ export function deleteOneHomework(state) {
         },
     };
 
-    data.modal.choiceModal.text = ['Вы действительно хотите', <br />, 'удалить домашнее задание?'];
-    data.modal.choiceModal.add_text = [ ' Внимание! Вместе с удалением дз,',
+    data.modal.choiceModal.text = ['Вы действительно хотите', <br/>, 'удалить домашнее задание?'];
+    data.modal.choiceModal.add_text = [' Внимание! Вместе с удалением дз,',
         <br/>, 'удаляются связанные с ним оценки'];
     data.modal.choiceModal.onClickYes = 'deleteOneHomeworkModal';
 
@@ -108,7 +108,6 @@ export function deleteOneHomework(state) {
 
 export function deleteOneHomeworkModal(state) {
     const id = state.page.homeworkID;
-    //console.log(Storage.getHomeworkByID(id));
     route('/module/' + Storage.getHomeworkByID(id).start.split('_')[0]);
     Storage.deleteHomeworkByID(id);
     return {
@@ -122,8 +121,6 @@ export function deleteOneHomeworkModal(state) {
     };
 }
 
-
-
 export function getKey(state, e) {
     let data = {};
     if (e.code === 'Escape') {
@@ -134,13 +131,13 @@ export function getKey(state, e) {
                 allChecked: false,
                 elements:
                     state.tableData.elements.map((item) => {
-                            return {
-                                ...item,
-                                checked: false
-                            }
+                        return {
+                            ...item,
+                            checked: false
+                        }
                     }),
             },
-            modal : {
+            modal: {
                 ...initModals()
             },
             editPanel: {
@@ -281,9 +278,14 @@ export function newHomeworkModal(state, num = null) {
     };
 
     if (num != null) {
+        const start = Storage.getHomeworkByID(num).start;
+        const end = Storage.getHomeworkByID(num).end;
+
         data.modal.newHomeworkModal.nameModal = Storage.getHomeworkByID(num).name;
-        data.modal.newHomeworkModal.startModal = Storage.getHomeworkByID(num).start;
-        data.modal.newHomeworkModal.endModal = Storage.getHomeworkByID(num).end;
+        data.modal.newHomeworkModal.startModal = Storage.getLessonByDoubleID(start).name;
+        data.modal.newHomeworkModal.startModalNum = Storage.getHomeworkByID(num).start;
+        data.modal.newHomeworkModal.endModal = Storage.getLessonByDoubleID(end).name;
+        data.modal.newHomeworkModal.endModalNum = Storage.getHomeworkByID(num).end;
         data.modal.newHomeworkModal.dateModal = Storage.getHomeworkByID(num).date;
         data.modal.newHomeworkModal.descModal = Storage.getHomeworkByID(num).desc;
     }
@@ -321,7 +323,7 @@ export function closeModal(state, modal) {
         modal: {
             ...state.modal,
             [modal]: {
-                ...state.modal[modal],
+                //...state.modal[modal],
                 isOpen: null
             },
         }
@@ -445,8 +447,8 @@ export function addLesson(state, num = null) {
 
 export function addHomework(state, num = null) {
     const name = state.modal.newHomeworkModal.nameModal;
-    const start = state.modal.newHomeworkModal.startModal;
-    const end = state.modal.newHomeworkModal.endModal;
+    const start = state.modal.newHomeworkModal.startModalNum;
+    const end = state.modal.newHomeworkModal.endModalNum;
     const date = state.modal.newHomeworkModal.dateModal;
     const desc = state.modal.newHomeworkModal.descModal;
     let valid = true;
@@ -455,25 +457,25 @@ export function addHomework(state, num = null) {
         ...state.modal,
         newHomeworkModal: {
             ...state.modal.newHomeworkModal,
-            textErrName: '',
-            textErrStart: '',
-            textErrEnd: '',
-            textErrDate: ''
+            nameModalErr: '',
+            startModalErr: '',
+            endModalErr: '',
+            textErrDate: '',
         }
     };
 
     if (!name || name === '') {
-        dataModal.newHomeworkModal.textErrName = 'Введите название занятия';
+        dataModal.newHomeworkModal.nameModalErr = 'Введите название занятия';
         valid = false;
     }
 
     if (!start) {
-        dataModal.newHomeworkModal.textErrStart = 'Выберите занятие сдачи';
+        dataModal.newHomeworkModal.startModalErr = 'Выберите занятие выдачи';
         valid = false;
     }
 
     if (!end) {
-        dataModal.newHomeworkModal.textErrEnd = 'Выберите занятие выдачи';
+        dataModal.newHomeworkModal.endModalErr = 'Выберите занятие сдачи';
         valid = false;
     }
 
@@ -485,8 +487,8 @@ export function addHomework(state, num = null) {
 
         if (hw_start_module > hw_end_module ||
             (hw_start_module === hw_end_module && hw_start_lesson > hw_end_lesson)) {
-            dataModal.newHomeworkModal.textErrStart = 'Занятие сдачи выше задания выдачи';
-            dataModal.newHomeworkModal.textErrEnd = 'Занятие выдачи меньше задания сдачи';
+            dataModal.newHomeworkModal.startModalErr = 'Занятие сдачи выше задания выдачи';
+            dataModal.newHomeworkModal.endModalErr = 'Занятие выдачи меньше задания сдачи';
             valid = false;
         }
     }
@@ -652,13 +654,98 @@ export function onInputNewMarkModal(state, e) {
     }
 }
 
+export function onInputSelectModal(state, e, modalID) {
+    const click = clickOutNewHomeworkModal(state, e);
+    let data = {
+        selectOpen: e.currentTarget.id + 'Select',
+        modal: {
+            ...state.modal,
+            [modalID]: {
+                ...click.modal[modalID],
+                [e.currentTarget.id]: e.currentTarget.value,
+                [e.currentTarget.id + 'Select']: {
+                    isOpen: true
+                }
+            },
+        }
+    };
+
+    if (e.type !== 'focusin') {
+        data.modal[modalID][e.currentTarget.id + 'Num'] = undefined;
+    }
+    return data;
+}
+
+export function clickOutNewHomeworkModal(state, e) {
+    const modalID = 'newHomeworkModal';
+    let data = { };
+
+    if (state.modal[modalID].isOpen && state.selectOpen === 'endModalSelect' && !document.getElementById('endModalLine').contains(e.target)) {
+        let inputID = 'endModal';
+        const selectID = inputID + 'Select';
+
+        data = {
+            [modalID]: {
+                ...state.modal[modalID],
+                [selectID]: {
+                    isOpen: false
+                }
+            },
+        };
+
+        if (!state.modal[modalID][inputID + 'Num']) {
+            data[modalID][inputID + 'Err'] = 'Выберите занятие сдачи';
+        }
+    } else if (state.selectOpen === 'startModalSelect' && !document.getElementById('startModalLine').contains(e.target)) {
+        let inputID = 'startModal';
+        const selectID = inputID + 'Select';
+
+        data = {
+            [modalID]: {
+                ...state.modal[modalID],
+                [selectID]: {
+                    isOpen: false
+                }
+            },
+        };
+
+        if (!state.modal[modalID][inputID + 'Num']) {
+            data[modalID][inputID + 'Err'] = 'Выберите занятие выдачи';
+        }
+    }
+
+    return {
+        modal: {
+            ...state.modal,
+            ...data
+        }
+    };
+}
+
+export function chooseSelect(state, modalID, inputID, lessonID) {
+    return {
+        modal: {
+            ...state.modal,
+            [modalID]: {
+                ...state.modal[modalID],
+                [inputID]: Storage.getLessonByDoubleID(lessonID).name,
+                [inputID + 'Num']: lessonID,
+                [inputID + 'Select']: {
+                     isOpen: false
+                },
+                [inputID + 'Err'] : ''
+            },
+        }
+    }
+}
+
 export function initModals() {
     return {
-        newModuleModal : {},
-        newLessonModal : {},
-        newHomeworkModal : {},
-        newMarkModal : {},
-        infoModal : {},
-        choiceModal : {}
+        newModuleModal: {},
+        newLessonModal: {},
+        newHomeworkModal: {},
+        newMarkModal: {},
+        infoModal: {},
+        choiceModal: {}
     }
 }

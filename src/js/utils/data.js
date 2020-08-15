@@ -1,5 +1,5 @@
-export const dataFileUrl = '/data.json';
-export const routerUrl = '/'; // /practice/
+export const dataFileUrl = './data.json';
+export const routerUrl = '/practice/'; // /practice/
 
 class Storage {
     constructor() {
@@ -39,11 +39,14 @@ class Storage {
         return this.store.lessons[id_module][lesson_id];
     }
 
-    getLessonsNums() {
+    getLessonsNums(search = '') {
+        search = search.toLowerCase();
         let data = [];
         for (let i = 0; i < this.store.modules.length; i++) {
             for (let j = 0; j < this.store.lessons[i].length; j++) {
-                data.push({name: this.store.lessons[i][j].name, num: i + '_' + j});
+                if (this.store.lessons[i][j].name.toLowerCase().includes(search)) {
+                    data.push({name: this.store.lessons[i][j].name, num: i + '_' + j});
+                }
             }
         }
         return data;
@@ -345,6 +348,13 @@ class Storage {
         }
     }
 
+    getLessonByDoubleID(id) {
+        const hw_module = id.split('_')[0];
+        const hw_lesson = id.split('_')[1];
+
+        return this.getLessonByID(hw_module, hw_lesson);
+    }
+
     moveUp(type, index, page = null) {
         switch (type) {
             case 'modules':
@@ -391,6 +401,7 @@ class Storage {
     }
 
     generateSelection(type, search, page = null) {
+        search = search.toLowerCase();
         let selection = [];
         switch (type) {
             case 'modules':

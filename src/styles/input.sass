@@ -1,6 +1,7 @@
 @import 'variables'
 
 @mixin line-properties
+    position: relative
     width: 300px
     margin: 10px auto 10px auto
 
@@ -41,6 +42,46 @@ input:focus
     font-size: 13px
     font-weight: bold
     cursor: pointer
+
+.line .selectWindow
+    position: absolute
+    left: -2px
+    top: 28px
+
+    width: 300px
+    max-height: 130px
+
+    font-size: 12px
+    background: $color-white-alpha
+
+    border: 2px solid $color-line-border
+    border-top: none
+    box-sizing: border-box
+    overflow: scroll
+    -webkit-overflow-scrolling: touch
+
+    z-index: 2
+    //border-radius: 0 0 0 0
+
+.line .selectWindow .element
+    margin: 0 auto
+    border-top: 1px solid $color-line-border
+
+    width: 95%
+    cursor: pointer
+
+.line .selectWindow .notFound
+    margin: 0 auto
+    width: 95%
+
+.line .selectWindow .element .text
+    text-align: left
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+.line .selectWindow .element:hover, .line .selectWindow .element:active
+    background: $color-grey-light
 
 .line input[type="text"]
     height: 100%

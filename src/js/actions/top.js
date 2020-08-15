@@ -2,7 +2,7 @@ import Storage from "../utils/data";
 import { route } from 'preact-router';
 
 export function searchUpdate(state, e, type) {
-    const search = e.currentTarget.value.toLowerCase();
+    const search = e.currentTarget.value;
     return {
         tableData : {
             ...state.tableData,

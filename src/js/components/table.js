@@ -13,7 +13,7 @@ import {routerUrl} from "../utils/data";
 
 const mapToProps = ({type, page, tableData, searchText}) => ({type, page, tableData, searchText});
 
-class Table extends Component {
+export class Table extends Component {
     constructor(props) {
         super();
         this.label = '';
@@ -48,8 +48,9 @@ class Table extends Component {
         document.removeEventListener('keydown', this.props.getKey);
     }
 
-    fillSearch(name, search) {
+    static fillSearch(name, search) {
         if (search) {
+            search = search.toLowerCase();
             const findIndex = name.toLowerCase().indexOf(search);
             let startStr = '', middleStr = '', endStr = '';
             if (findIndex !== -1) {
@@ -62,6 +63,10 @@ class Table extends Component {
                     {middleStr}
                 </span>
                     {endStr}
+                </Fragment>;
+            } else {
+                return <Fragment>
+                    {name}
                 </Fragment>;
             }
         } else {
@@ -98,7 +103,7 @@ class Table extends Component {
                                     </td>
                                     <td>
                                         <Link activeClassName="active" href={routerUrl + "module/" + el.num}>
-                                            {this.fillSearch(el.name, this.props.searchText)}
+                                            {Table.fillSearch(el.name, this.props.searchText)}
                                         </Link>
                                     </td>
                                     <td>
@@ -143,7 +148,7 @@ class Table extends Component {
                                     <td>
                                         <Link activeClassName="active"
                                               href={routerUrl + "module/" + this.props.page.moduleID + "/lesson/" + el.num}>
-                                            {this.fillSearch(el.name, this.props.searchText)}
+                                            {Table.fillSearch(el.name, this.props.searchText)}
                                         </Link>
                                     </td>
                                     <td>
@@ -204,7 +209,7 @@ class Table extends Component {
                                             {Number(el.num) + 1}
                                         </td>
                                         <td>
-                                            {this.fillSearch(el.name, this.props.searchText)}
+                                            {Table.fillSearch(el.name, this.props.searchText)}
                                         </td>
                                         <td>
                                             {el.points}
@@ -253,7 +258,7 @@ class Table extends Component {
                                             {Number(el.num) + 1}
                                         </td>
                                         <td>
-                                            {this.fillSearch(el.name, this.props.searchText)}
+                                            {Table.fillSearch(el.name, this.props.searchText)}
                                         </td>
                                         <td>
                                             {el.points}
