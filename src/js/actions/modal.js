@@ -1,5 +1,6 @@
 import {h, Component, render, Fragment} from 'preact';
 import {route} from 'preact-router';
+import {routerUrl} from "../utils/data";
 
 import Storage from "../utils/data";
 import {countChecked, getChecked} from "./table";
@@ -76,7 +77,7 @@ export function deleteOneLesson(state) {
 
 export function deleteOneLessonModal(state) {
     Storage.deleteLessonByID(state.page.lessonID, state.page.moduleID);
-    route('/module/' + state.page.moduleID);
+    route(routerUrl + 'module/' + state.page.moduleID);
     return {
         modal: {
             ...state.modal,
@@ -108,7 +109,7 @@ export function deleteOneHomework(state) {
 
 export function deleteOneHomeworkModal(state) {
     const id = state.page.homeworkID;
-    route('/module/' + Storage.getHomeworkByID(id).start.split('_')[0]);
+    route(routerUrl + 'module/' + Storage.getHomeworkByID(id).start.split('_')[0]);
     Storage.deleteHomeworkByID(id);
     return {
         modal: {

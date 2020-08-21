@@ -1,6 +1,7 @@
 import Storage from '../js/utils/data.js'
 
 document.addEventListener('DOMContentLoaded', function() {
+    const discipline = 'Фронтенд разработка';
     const name_modules = ['Веб-верстка', 'JavaScript', 'Система контроля версий Git',
         'Онлайн сессии по Веб-разработке', 'Универсальные знания программиста'];
     const points_modules = [35, 35, 5, 15, 10];
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '- Основы HTTP, методы HTTP;<br/>' +
         '- Организация работы с сетью из браузера. Авторизация с использованием cookies.';
     Storage.init();
+    Storage.setNameDiscipline(discipline);
 
     // Создание модулей
     name_modules.map((item, index) => {

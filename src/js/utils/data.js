@@ -1,4 +1,4 @@
-export const dataFileUrl = './data.json';
+export const dataFileUrl = '/practice/data.json';
 export const routerUrl = '/practice/'; // /practice/
 
 class Storage {
@@ -15,12 +15,21 @@ class Storage {
 
     init() {
         this.store = {};
+        this.store.discipline = '';
         this.store.modules = [];
         this.store.lessons = [];
         this.store.homeworks = [];
         this.store.marks_lesson = [];
         this.store.marks_homework = [];
         this.tmp.prevCheck = null;
+    }
+
+    setNameDiscipline(discipline) {
+        this.store.discipline = discipline;
+    }
+
+    getNameDiscipline(discipline) {
+        return this.store.discipline;
     }
 
     getModules() {

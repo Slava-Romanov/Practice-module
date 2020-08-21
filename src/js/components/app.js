@@ -21,6 +21,8 @@ import RouteNotFound from "./routeNotFound";
 
 import { routerUrl } from "../utils/data";
 import Navigation from "./elements/navigation";
+import downIcon from "../../images/panel/downIcon.svg";
+import backBtn from "../../images/backBtn.svg"
 
 export default class App extends Component {
     render() {
@@ -37,6 +39,9 @@ export default class App extends Component {
                 <Navigation/>
                 <div className='page'>
                     <div className='page_content' id='content'>
+                        <div className='backProfileLink'>
+                            <img src={backBtn} onClick={() => window.history.back()}/>
+                        </div>
                         <Router>
                         <ModulesPage path={routerUrl}/>
                         <LessonsPage path={routerUrl + "module/:moduleID"}/>

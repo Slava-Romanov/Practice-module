@@ -1,5 +1,6 @@
 @import 'styles/index.sass';
 
+@import 'styles/fonts.sass';
 @import 'styles/animations.sass';
 @import 'styles/buttons.sass';
 @import 'styles/input.sass';

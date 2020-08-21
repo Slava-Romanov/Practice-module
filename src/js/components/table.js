@@ -23,7 +23,7 @@ export class Table extends Component {
     initType(props) {
         switch (props.type) {
             case 'modules':
-                this.label = 'Таблица модулей дисциплины';
+                this.label = 'Таблица модулей, дисциплина: "' + Storage.getNameDiscipline() + '"';
                 break;
             case 'lessons':
                 this.label = 'Таблица занятий, модуль: "' + Storage.getModuleByID(props.page.moduleID).name + '"';

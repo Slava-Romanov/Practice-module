@@ -11,19 +11,34 @@
 .navigation
     max-width: 980px
     margin: 40px auto -40px auto
+    padding-left: 12px
     color: $color-table-title
     font-size: 10px
     font-style: italic
+    box-sizing: border-box
+
 
 .navigation a
      color: $color-table-title
 
 .page_content
+    position: relative
     min-height: 600px
     padding: 10px
 
     background: $color-white
     border-radius: 9px
+
+.page_content .backProfileLink
+    position: absolute
+    left: -40px
+    top: -5px
+
+.backProfileLink img
+    width: 40px
+    height: 40px
+    cursor: pointer
+    opacity: 0.5
 
 .middleBlock
     height: 500px

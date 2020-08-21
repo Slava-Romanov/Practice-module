@@ -2,16 +2,35 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'development', //mode: 'development','production'
+  mode: 'production', //mode: 'development','production'
   entry: {
     bundle: ['whatwg-fetch', path.join(__dirname, '/src/js/index.js')]
   },
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'public/practice'),
     filename: '[name].js',//,//.[contenthash]
-    publicPath: '/'
+    publicPath: '/practice/'
+  },
+  devServer: {
+    before: (app, server) => {
+      app.get("*", (req, res, next) => {
+        //console.log(req, res);
+        if ( ! (req.url.endsWith(".svg")
+            || req.url.endsWith(".js")
+            || req.url.endsWith(".ico")
+            || req.url.endsWith(".js.map")) ) {
+          req.url = "/practice/"
+        }
+        //if (req.url.endsWith(".js"))
+        //  req.url = "/main.js"
+
+
+        next("route");
+      });
+    }
   },
   resolve: {
     alias: {
@@ -59,17 +78,29 @@ module.exports = {
         options: {
           context: 'src',
           name(resourcePath, resourceQuery) {
-              return 'practice/[path][name].[ext]';
+              return '[path][name].[ext]';
               //[contenthash].[ext]
           },
-        },
-      },
+        }
+      }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/src/index.html'),
       filename: 'index.html'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/fonts',
+          to: 'fonts'
+        },
+        {
+          from: 'src/generator/data.json',
+          to: './data.json'
+        }
+      ]
     }),
   ],
   optimization: {
