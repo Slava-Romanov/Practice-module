@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "dev": "webpack-dev-server .",
+    "dev": "webpack-dev-server",
     "watch": "webpack --watch",
     "build": "webpack"
   },

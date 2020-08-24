@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
 module.exports = {
   mode: 'production', //mode: 'development','production'
   entry: {
@@ -17,11 +16,15 @@ module.exports = {
   devServer: {
     before: (app, server) => {
       app.get("*", (req, res, next) => {
-        //console.log(req, res);
+        console.log(req.url);
         if ( ! (req.url.endsWith(".svg")
             || req.url.endsWith(".js")
             || req.url.endsWith(".ico")
-            || req.url.endsWith(".js.map")) ) {
+            || req.url.endsWith(".ttf")
+            || req.url.endsWith(".woff")
+            || req.url.endsWith(".woff2")
+            || req.url.endsWith(".js.map")
+            || req.url.endsWith(".json")) ) {
           req.url = "/practice/"
         }
         //if (req.url.endsWith(".js"))
@@ -30,7 +33,8 @@ module.exports = {
 
         next("route");
       });
-    }
+    },
+    contentBase: __dirname + "/public/"
   },
   resolve: {
     alias: {
