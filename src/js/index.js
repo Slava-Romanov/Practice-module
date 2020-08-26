@@ -1,4 +1,4 @@
-import './../index.css'
+import '../index.css'
 
 import App from './components/app';
 import {Fragment, h, render} from 'preact';
@@ -9,8 +9,6 @@ import { dataFileUrl } from "./utils/data";
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-//import 'whatwg-fetch'
-//window.
 fetch(dataFileUrl).then((response) => {
     return response.json();
 }).then((data) => {

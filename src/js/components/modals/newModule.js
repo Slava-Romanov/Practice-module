@@ -35,19 +35,14 @@ class NewModuleModal extends Component {
                 <div className='title'>
                     {this.title}
                 </div>
-                <div className='line'>
-                    <input type='text' id='nameModal' onInput={e => this.props.onInputNewModuleModal(e)} required
-                           placeholder='Название модуля'
-                           value={modal.nameModal}>
-                    </input>
-                </div>
+                <input className='line' type='text' id='nameModal' onInput={e => this.props.onInputNewModuleModal(e)} required
+                       placeholder='Название модуля' value={modal.nameModal}>
+                </input>
                 {modal.textErrName ? <div className='err'>{modal.textErrName}</div> : ''}
-                <div className='line'>
-                    <input type='text' id='pointsModal' onInput={e => this.props.onInputNewModuleModal(e)} required
+                <input className='line' type='text' id='pointsModal' onInput={e => this.props.onInputNewModuleModal(e)} required
                            placeholder='Максимальное количество баллов'
                            value={modal.pointsModal}>
-                    </input>
-                </div>
+                </input>
                 {modal.textErrPoints ? <div className='err'>{modal.textErrPoints}</div> : ''}
                 <a>
                     <input type='submit' className='standard_btn blue_bg'

@@ -49,24 +49,21 @@ class NewHomeworkModal extends Component {
                 <div className='title'>
                     {this.title}
                 </div>
-                <div className='line'>
-                    <input type='text' id='nameModal' onInput={e => this.props.onInputNewHomeworkModal(e)} required
-                           placeholder='Название домашнего задания'
-                           value={modal.nameModal}/>
-                </div>
+                <input type='text' id='nameModal' className='line' onInput={e => this.props.onInputNewHomeworkModal(e)} required
+                       placeholder='Название домашнего задания' value={modal.nameModal}/>
                 <div>{modal.nameModalErr ? <div className='err'>{modal.nameModalErr}</div>: ''}</div>
 
-                <div className='line' id='startModalLine'>
-                    <input type='text' id='startModal'
+                <div className='blockLine' id='startModalLine'>
+                    <input type='text' className='line' id='startModal'
                            onfocusin={e => this.props.onInputSelectModal(e, this.modalID)}
                            onInput={e => this.props.onInputSelectModal(e, this.modalID)} required
                            placeholder='Занятие выдачи' value={modal.startModal}/>
                     <LineSelect inputID='startModal' modalID={this.modalID} children={Storage.getLessonsNums(modal.startModal)}/>
                 </div>
-
                 {modal.startModalErr ? <div className='err'>{modal.startModalErr}</div> : ''}
-                <div className='line' id='endModalLine'>
-                    <input type='text' id='endModal'
+
+                <div className='blockLine' id='endModalLine'>
+                    <input type='text' className='line' id='endModal'
                            onfocusin={e => this.props.onInputSelectModal(e, this.modalID)}
                         onInput={e => this.props.onInputSelectModal(e, this.modalID)} required
                            placeholder='Занятие сдачи' value={modal.endModal}/>
@@ -74,19 +71,14 @@ class NewHomeworkModal extends Component {
                 </div>
                 {modal.endModalErr ? <div className='err'>{modal.endModalErr}</div> : ''}
 
-                <div className='line'>
-                    <input type='text' id='dateModal' onInput={e => this.props.onInputNewHomeworkModal(e)} required
-                           placeholder='Крайний срок сдачи' value={modal.dateModal}>
-                    </input>
-                </div>
+                <input type='text' id='dateModal' className='line' onInput={e => this.props.onInputNewHomeworkModal(e)} required
+                       placeholder='Крайний срок сдачи' value={modal.dateModal}/>
                 {modal.textErrDate ? <div className='err'>{modal.textErrDate}</div> : ''}
 
-                <div className='line_area'>
-                    <textarea id="descModal" onInput={e => this.props.onInputNewHomeworkModal(e)}
+                <textarea id="descModal" className='line_area' onInput={e => this.props.onInputNewHomeworkModal(e)}
                               value={modal.descModal}
                               placeholder="Описание домашнего занятия (необязательно)" maxLength="512" rows="14"
                               cols="33"/>
-                </div>
 
                 <a>
                     <input type='submit' className='standard_btn blue_bg'

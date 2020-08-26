@@ -3,6 +3,8 @@ import {connect} from 'redux-zero/preact';
 
 import actions from '../../actions/actions';
 import closeModalIcon from "../../../images/closeModalIcon.svg";
+import LineSelect from "../elements/lineSelect";
+import Storage from "../../utils/data";
 
 const mapToProps = ({modal}) => ({modal});
 
@@ -10,6 +12,7 @@ class NewLessonModal extends Component {
     constructor(props) {
         super();
         this.title = '';
+        this.modalID = 'newLessonModal';
     }
 
     initType(props) {
@@ -35,28 +38,21 @@ class NewLessonModal extends Component {
                 <div className='title'>
                     {this.title}
                 </div>
-                <div className='line'>
-                    <input type='text' id='nameModal' onInput={e => this.props.onInputNewLessonModal(e)} required
+                <input type='text' className='line' id='nameModal' onInput={e => this.props.onInputNewLessonModal(e)} required
                            placeholder='Название занятия'
                            value={modal.nameModal}>
-                    </input>
-                </div>
+                </input>
                 {modal.textErrName ? <div className='err'>{modal.textErrName}</div> : ''}
-                <div className='line'>
-                    <select id='typeModal' value={modal.typeModal} required
-                            onChange={e => this.props.onInputNewLessonModal(e)}>
-                        <option selected disabled>Тип занятия</option>
-                        <option value='lec'>Лекция</option>
-                        <option value='sem'>Семинар</option>
-                        <option value='rk'>Рубежный контроль</option>
-                        <option value='ex'>Экзамен</option>
-                    </select>
+                <div className='blockLine' id='typeModalLine'>
+                    <input type='text' className='line' id='typeModal'
+                           onfocusin={e => this.props.onInputSelectModal(e, this.modalID)}
+                           onInput={e => this.props.onInputSelectModal(e, this.modalID)} required
+                           placeholder='Тип занятия' value={modal.typeModal} readonly/>
+                    <LineSelect inputID='typeModal' modalID={this.modalID} children={Storage.getTypesNums()}/>
                 </div>
                 {modal.textErrType ? <div className='err'>{modal.textErrType}</div> : ''}
-                <div className='line_area'>
-                    <textarea id="descModal" onInput={e => this.props.onInputNewLessonModal(e)} value={modal.descModal}
-                              placeholder="Описание занятия (необязательно)" maxLength="512" rows="14" cols="33"/>
-                </div>
+                <textarea id="descModal" className="line_area" onInput={e => this.props.onInputNewLessonModal(e)} value={modal.descModal}
+                          placeholder="Описание занятия (необязательно)" maxLength="512" rows="14" cols="33"/>
                 <a>
                     <input type='submit' className='standard_btn blue_bg'
                            value={this.btn} onClick={e => this.props.addLesson(e, modal.num)}>

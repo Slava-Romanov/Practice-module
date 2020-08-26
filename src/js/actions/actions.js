@@ -27,7 +27,7 @@ const actions = {
     onInputSelectModal: (state, e, modalID) => modalActions.onInputSelectModal(state, e, modalID),
     getKey: (state, e) => modalActions.getKey(state, e),
 
-    chooseSelect: (state, modalID, inputID, lessonID) => modalActions.chooseSelect(state, modalID, inputID, lessonID),
+    chooseSelect: (state, modalID, inputID, numData, textData) => modalActions.chooseSelect(state, modalID, inputID, numData, textData),
     clickOutNewHomeworkModal: (state, e) => modalActions.clickOutNewHomeworkModal(state, e),
 
     deleteOneLesson: (state) => modalActions.deleteOneLesson(state),

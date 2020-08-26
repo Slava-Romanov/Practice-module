@@ -61,6 +61,14 @@ class Storage {
         return data;
     }
 
+    getTypesNums() {
+        let data = [];
+        for (let key in this.typesHomeworkNames) {
+            data.push({name: this.typesHomeworkNames[key], num: key});
+        }
+        return data;
+    }
+
     getModuleByID(id) {
         return this.store.modules[id];
     }

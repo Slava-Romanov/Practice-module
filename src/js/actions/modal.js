@@ -390,7 +390,7 @@ export function addModule(state, num = null) {
 
 export function addLesson(state, num = null) {
     const name = state.modal.newLessonModal.nameModal;
-    const type = state.modal.newLessonModal.typeModal;
+    const type = state.modal.newLessonModal.typeModalNum;
     const desc = state.modal.newLessonModal.descModal;
     let valid = true;
 
@@ -723,14 +723,14 @@ export function clickOutNewHomeworkModal(state, e) {
     };
 }
 
-export function chooseSelect(state, modalID, inputID, lessonID) {
+export function chooseSelect(state, modalID, inputID, numData, textData) {
     return {
         modal: {
             ...state.modal,
             [modalID]: {
                 ...state.modal[modalID],
-                [inputID]: Storage.getLessonByDoubleID(lessonID).name,
-                [inputID + 'Num']: lessonID,
+                [inputID]: textData,//Storage.getLessonByDoubleID(numData).name,
+                [inputID + 'Num']: numData,
                 [inputID + 'Select']: {
                      isOpen: false
                 },

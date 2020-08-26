@@ -15,12 +15,13 @@ class lineSelect extends Component {
     }
 
     render(props) {
+        console.log(props.children);
         const select = props.modal[this.modalID][this.selectID];
         return select && select.isOpen && <Fragment>
             <div className='selectWindow'>
                 {
                     props.children.length !== 0? props.children.map((el) => (
-                        <div className='element' onClick={() => this.props.chooseSelect(this.modalID, this.inputID, el.num)}>
+                        <div className='element' onClick={() => this.props.chooseSelect(this.modalID, this.inputID, el.num, el.name)}>
                             <div className='text'>
                                 {Table.fillSearch(el.name, props.modal[props.modalID][this.inputID])}
                             </div>
