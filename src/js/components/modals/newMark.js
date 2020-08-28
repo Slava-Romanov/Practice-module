@@ -35,21 +35,29 @@ class NewMarkModal extends Component {
                 <div className='title'>
                     {this.title}
                 </div>
-                <input type='text' id='nameModal' onInput={e => this.props.onInputNewMarkModal(e)} required
-                           placeholder='Комментарий'
-                           value={modal.nameModal}>
-                </input>
-                {modal.textErrName ? <div className='err'>{modal.textErrName}</div> : ''}
-                <input type='text' id='pointsModal' onInput={e => this.props.onInputNewMarkModal(e)} required
-                           placeholder='Количество баллов'
-                           value={modal.pointsModal}>
-                </input>
-                {modal.textErrPoints ? <div className='err'>{modal.textErrPoints}</div> : ''}
-                <a>
-                    <input type='submit' className='standard_btn blue_bg'
-                           value={this.btn} onClick={e => this.props.addMark(e, modal.num)}>
-                    </input>
-                </a>
+
+                <div className='inputElement'>
+                    <input type='text' id='nameModal' className={`line inputFocus inputPlaceholder
+                        ${modal.nameModalErr ? ' errorLine' : ''}`}
+                           onfocusout={e => this.props.onInputNewMarkModal(e)}
+                           onInput={e => this.props.onInputNewMarkModal(e)} required
+                           placeholder='Комментарий' value={modal.nameModal}/>
+                    {modal.nameModalErr ? <div className='err'>{modal.nameModalErr}</div> : ''}
+                    <label>Комментарий</label>
+                </div>
+
+                <div className='inputElement'>
+                    <input type='text' id='pointsModal' className={`line inputFocus inputPlaceholder
+                        ${modal.pointsModalErr ? ' errorLine' : ''}`}
+                           onfocusout={e => this.props.onInputNewMarkModal(e)}
+                           onInput={e => this.props.onInputNewMarkModal(e)} required
+                           placeholder='Количество баллов' value={modal.pointsModal}/>
+                    {modal.pointsModalErr ? <div className='err'>{modal.pointsModalErr}</div> : ''}
+                    <label>Количество баллов</label>
+                </div>
+
+                <input type='submit' className='standard_btn blue_bg'
+                       value={this.btn} onClick={e => this.props.addMark(e, modal.num)}/>
             </div>
         </div>;
     }

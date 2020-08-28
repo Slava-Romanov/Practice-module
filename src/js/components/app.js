@@ -21,7 +21,6 @@ import RouteNotFound from "./routeNotFound";
 
 import { routerUrl } from "../utils/data";
 import Navigation from "./elements/navigation";
-import downIcon from "../../images/panel/downIcon.svg";
 import backBtn from "../../images/backBtn.svg"
 
 export default class App extends Component {

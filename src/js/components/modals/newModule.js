@@ -35,20 +35,29 @@ class NewModuleModal extends Component {
                 <div className='title'>
                     {this.title}
                 </div>
-                <input className='line' type='text' id='nameModal' onInput={e => this.props.onInputNewModuleModal(e)} required
-                       placeholder='Название модуля' value={modal.nameModal}>
-                </input>
-                {modal.textErrName ? <div className='err'>{modal.textErrName}</div> : ''}
-                <input className='line' type='text' id='pointsModal' onInput={e => this.props.onInputNewModuleModal(e)} required
-                           placeholder='Максимальное количество баллов'
-                           value={modal.pointsModal}>
-                </input>
-                {modal.textErrPoints ? <div className='err'>{modal.textErrPoints}</div> : ''}
-                <a>
-                    <input type='submit' className='standard_btn blue_bg'
-                           value={this.btn} onClick={e => this.props.addModule(e, modal.num)}>
-                    </input>
-                </a>
+
+                <div className='inputElement'>
+                    <input type='text' id='nameModal' className={`line inputFocus inputPlaceholder
+                        ${modal.nameModalErr ? ' errorLine' : ''}`}
+                           onfocusout={e => this.props.onInputNewModuleModal(e)}
+                           onInput={e => this.props.onInputNewModuleModal(e)} required
+                           placeholder='Название модуля' value={modal.nameModal}/>
+                    {modal.nameModalErr ? <div className='err'>{modal.nameModalErr}</div>: ''}
+                    <label>Название домашнего задания</label>
+                </div>
+
+                <div className='inputElement'>
+                    <input type='text' id='pointsModal' className={`line inputFocus inputPlaceholder
+                        ${modal.pointsModalErr ? ' errorLine' : ''}`}
+                           onfocusout={e => this.props.onInputNewModuleModal(e)}
+                           onInput={e => this.props.onInputNewModuleModal(e)} required
+                           placeholder='Максимальное количество баллов' value={modal.pointsModal}/>
+                    {modal.pointsModalErr ? <div className='err'>{modal.pointsModalErr}</div>: ''}
+                    <label>Максимальное количество баллов</label>
+                </div>
+
+                <input type='submit' className='standard_btn blue_bg'
+                       value={this.btn} onClick={e => this.props.addModule(e, modal.num)}/>
             </div>
         </div>;
     }

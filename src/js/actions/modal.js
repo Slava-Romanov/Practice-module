@@ -321,11 +321,12 @@ export function newMarkModal(state, num = null) {
 
 export function closeModal(state, modal) {
     return {
+        selectOpen: null,
         modal: {
             ...state.modal,
             [modal]: {
                 //...state.modal[modal],
-                isOpen: null
+                //isOpen: null
             },
         }
     }
@@ -340,18 +341,18 @@ export function addModule(state, num = null) {
         ...state.modal,
         newModuleModal: {
             ...state.modal.newModuleModal,
-            textErrName: '',
-            textErrPoints: ''
+            nameModalErr: '',
+            pointsModalErr: ''
         }
     };
 
     if (!name || name === '') {
-        dataModal.newModuleModal.textErrName = 'Введите название модуля';
+        dataModal.newModuleModal.nameModalErr = 'Введите название модуля';
         valid = false;
     }
 
     if (!Number(points) || Number(points) <= 0) {
-        dataModal.newModuleModal.textErrPoints = 'Введенное значение должно быть положительным числом';
+        dataModal.newModuleModal.pointsModalErr = 'Введенное значение должно быть положительным числом';
         valid = false;
     }
 
@@ -398,18 +399,18 @@ export function addLesson(state, num = null) {
         ...state.modal,
         newLessonModal: {
             ...state.modal.newLessonModal,
-            textErrName: '',
-            textErrType: ''
+            nameModalErr: '',
+            typeModalErr: ''
         }
     };
 
     if (!name || name === '') {
-        dataModal.newLessonModal.textErrName = 'Введите название занятия';
+        dataModal.newLessonModal.nameModalErr = 'Введите название занятия';
         valid = false;
     }
 
     if (!type) {
-        dataModal.newLessonModal.textErrType = 'Выберите тип занятия';
+        dataModal.newLessonModal.typeModalErr = 'Выберите тип занятия';
         valid = false;
     }
 
@@ -466,7 +467,7 @@ export function addHomework(state, num = null) {
     };
 
     if (!name || name === '') {
-        dataModal.newHomeworkModal.nameModalErr = 'Введите название занятия';
+        dataModal.newHomeworkModal.nameModalErr = 'Введите название домашнего задания';
         valid = false;
     }
 
@@ -495,7 +496,7 @@ export function addHomework(state, num = null) {
     }
 
     if (!date || date === '') {
-        dataModal.newHomeworkModal.textErrDate = 'Выберите крайний срок сдачи';
+        dataModal.newHomeworkModal.dateModalErr = 'Выберите крайний срок сдачи';
         valid = false;
     }
 
@@ -542,18 +543,18 @@ export function addMark(state, num = null) {
         ...state.modal,
         newMarkModal: {
             ...state.modal.newMarkModal,
-            textErrName: '',
-            textErrPoints: ''
+            nameModalErr: '',
+            pointsModalErr: ''
         }
     };
 
     if (!name || name === '') {
-        dataModal.newMarkModal.textErrName = 'Добавьте комментарий';
+        dataModal.newMarkModal.nameModalErr = 'Добавьте комментарий';
         valid = false;
     }
 
-    if (isNaN(Number(points)) || Number(points) < 0) {
-        dataModal.newMarkModal.textErrPoints = 'Введенное значение должно быть положительным числом, либо нулем';
+    if (isNaN(Number(points)) || Number(points) < 0 || points === '') {
+        dataModal.newMarkModal.pointsModalErr = 'Введенное значение должно быть положительным числом, либо нулем';
         valid = false;
     }
 
@@ -608,11 +609,31 @@ function createInfoModal(text) {
 }
 
 export function onInputNewModuleModal(state, e) {
+    const value = e.currentTarget.value;
+    let data = {};
+
+    if (e.currentTarget.id === 'nameModal') {
+        if (!value || value === '') {
+            //document.getElementById(e.currentTarget.id).classList.add("errorLine");
+            data.nameModalErr = 'Введите название модуля';
+        } else {
+            //document.getElementById(e.currentTarget.id).classList.remove("errorLine");
+            data.nameModalErr = '';
+        }
+    } else if (e.currentTarget.id === 'pointsModal') {
+        if (!Number(value) || Number(value) <= 0) {
+            data.pointsModalErr = 'Введенное значение должно быть положительным числом';
+        } else {
+            data.pointsModalErr = '';
+        }
+    }
+
     return {
         modal: {
             ...state.modal,
             newModuleModal: {
                 ...state.modal.newModuleModal,
+                ...data,
                 [e.currentTarget.id]: e.currentTarget.value
             },
         }
@@ -620,35 +641,89 @@ export function onInputNewModuleModal(state, e) {
 }
 
 export function onInputNewLessonModal(state, e) {
+    const value = e.currentTarget.value;
+    let data = {};
+
+    if (e.currentTarget.id === 'nameModal') {
+        if (!value || value === '') {
+            //document.getElementById(e.currentTarget.id).classList.add("errorLine");
+            data.nameModalErr = 'Введите название занятия';
+        } else {
+            //document.getElementById(e.currentTarget.id).classList.remove("errorLine");
+            data.nameModalErr = '';
+        }
+    }
+
     return {
         modal: {
             ...state.modal,
             newLessonModal: {
                 ...state.modal.newLessonModal,
-                [e.currentTarget.id]: e.currentTarget.value
+                ...data,
+                [e.currentTarget.id]: value
             },
         }
     }
 }
 
 export function onInputNewHomeworkModal(state, e) {
+    const value = e.currentTarget.value;
+    let data = {};
+
+    if (e.currentTarget.id === 'nameModal') {
+        if (!value || value === '') {
+            //document.getElementById(e.currentTarget.id).classList.add("errorLine");
+            data.nameModalErr = 'Введите название домашнего задания';
+        } else {
+            //document.getElementById(e.currentTarget.id).classList.remove("errorLine");
+            data.nameModalErr = '';
+        }
+    } else if (e.currentTarget.id === 'dateModal') {
+        if (!value || value === '') {
+            //document.getElementById(e.currentTarget.id).classList.add("errorLine");
+            data.dateModalErr = 'Выберите крайний срок сдачи';
+        } else {
+            //document.getElementById(e.currentTarget.id).classList.remove("errorLine");
+            data.dateModalErr = '';
+        }
+    }
+
     return {
         modal: {
             ...state.modal,
             newHomeworkModal: {
                 ...state.modal.newHomeworkModal,
-                [e.currentTarget.id]: e.currentTarget.value
+                ...data,
+                [e.currentTarget.id]: value
             },
         }
     }
 }
 
 export function onInputNewMarkModal(state, e) {
+    const value = e.currentTarget.value;
+    let data = {};
+
+    if (e.currentTarget.id === 'nameModal') {
+        if (!value || value === '') {
+            data.nameModalErr = 'Добавьте комментарий';
+        } else {
+            data.nameModalErr = '';
+        }
+    } else if (e.currentTarget.id === 'pointsModal') {
+        if (isNaN(Number(value)) || Number(value) < 0 || value === '') {
+            data.pointsModalErr = 'Введенное значение должно быть положительным числом, либо нулем';
+        } else {
+            data.pointsModalErr = '';
+        }
+    }
+
     return {
         modal: {
             ...state.modal,
             newMarkModal: {
                 ...state.modal.newMarkModal,
+                ...data,
                 [e.currentTarget.id]: e.currentTarget.value
             },
         }
@@ -656,17 +731,20 @@ export function onInputNewMarkModal(state, e) {
 }
 
 export function onInputSelectModal(state, e, modalID) {
-    const click = clickOutNewHomeworkModal(state, e);
+    //document.getElementById(e.currentTarget.id).classList.add("selectedLine");
+    //const click = clickOutNewHomeworkModal(state, e);
     let data = {
         selectOpen: e.currentTarget.id + 'Select',
         modal: {
             ...state.modal,
             [modalID]: {
-                ...click.modal[modalID],
+                ...state.modal[modalID],
                 [e.currentTarget.id]: e.currentTarget.value,
-                [e.currentTarget.id + 'Select']: {
-                    isOpen: true
-                }
+                //...click.modal[modalID],
+
+                // [e.currentTarget.id + 'Select']: {
+                //     isOpen: true
+                // }
             },
         }
     };
@@ -674,48 +752,95 @@ export function onInputSelectModal(state, e, modalID) {
     if (e.type !== 'focusin') {
         data.modal[modalID][e.currentTarget.id + 'Num'] = undefined;
     }
+
     return data;
 }
 
 export function clickOutNewHomeworkModal(state, e) {
+    //console.log('click out', state.selectOpen);
     const modalID = 'newHomeworkModal';
     let data = { };
 
-    if (state.modal[modalID].isOpen && state.selectOpen === 'endModalSelect' && !document.getElementById('endModalLine').contains(e.target)) {
+    if (state.selectOpen === 'endModalSelect' && !document.getElementById('endModalLine').contains(e.target)) {
         let inputID = 'endModal';
-        const selectID = inputID + 'Select';
-
-        data = {
-            [modalID]: {
-                ...state.modal[modalID],
-                [selectID]: {
-                    isOpen: false
-                }
-            },
-        };
-
         if (!state.modal[modalID][inputID + 'Num']) {
-            data[modalID][inputID + 'Err'] = 'Выберите занятие сдачи';
+            //document.getElementById(inputID).classList.add("errorLine");
+            data = {
+                [modalID]: {
+                    ...state.modal[modalID],
+                    [inputID + 'Err'] : 'Выберите занятие сдачи'
+                },
+            };
         }
+        // else {
+        //     //document.getElementById(inputID).classList.remove("errorLine");
+        // }
     } else if (state.selectOpen === 'startModalSelect' && !document.getElementById('startModalLine').contains(e.target)) {
         let inputID = 'startModal';
-        const selectID = inputID + 'Select';
-
-        data = {
-            [modalID]: {
-                ...state.modal[modalID],
-                [selectID]: {
-                    isOpen: false
-                }
-            },
-        };
-
         if (!state.modal[modalID][inputID + 'Num']) {
-            data[modalID][inputID + 'Err'] = 'Выберите занятие выдачи';
+            //document.getElementById(inputID).classList.add("errorLine");
+            data = {
+                [modalID]: {
+                    ...state.modal[modalID],
+                    [inputID + 'Err']: 'Выберите занятие выдачи'
+                },
+            };
+        }
+
+        // } else {
+        //     console.log('delete start');
+        //     //document.getElementById(inputID).classList.remove("errorLine");
+        // }
+    }
+    //console.log(state.modal[modalID]['startModalNum']);
+    let open = null;
+    if (document.getElementById('startModalLine').contains(e.target)) {
+            open = 'startModalSelect';
+            //console.log(1);
+    } else if (document.getElementById('endModalLine').contains(e.target)) {
+            open = 'endModalSelect';
+            //console.log(2);
+    }
+
+    // if (state.selectOpenWas != null && state.selectOpenWas !== open) {
+    //     document.getElementById(state.selectOpenWas.substr(0, state.selectOpenWas.length - 6)).classList.remove("selectedLine");
+    // }
+    //selectOpen: e.currentTarget.id + 'Select',
+    //console.log(open);
+
+    return {
+        selectOpen: open,
+        //selectOpenWas: open,
+        modal: {
+            ...state.modal,
+            ...data
+        }
+    };
+}
+
+export function clickOutNewLessonModal(state, e) {
+    const modalID = 'newLessonModal';
+    let data = { };
+
+    if (state.selectOpen === 'typeModalSelect' && !document.getElementById('typeModalLine').contains(e.target)) {
+        let inputID = 'typeModal';
+        if (!state.modal[modalID][inputID + 'Num']) {
+            data = {
+                [modalID]: {
+                    ...state.modal[modalID],
+                    [inputID + 'Err'] : 'Выберите тип занятия'
+                },
+            };
         }
     }
 
+    let open = null;
+    if (document.getElementById('typeModalLine').contains(e.target)) {
+        open = 'typeModalSelect';
+    }
+
     return {
+        selectOpen: open,
         modal: {
             ...state.modal,
             ...data
@@ -724,19 +849,45 @@ export function clickOutNewHomeworkModal(state, e) {
 }
 
 export function chooseSelect(state, modalID, inputID, numData, textData) {
-    return {
+    //document.getElementById(inputID).classList.remove("selectedLine");
+    //document.getElementById(inputID).classList.remove("errorLine");
+
+    const data = {
+        selectOpen: null,
         modal: {
             ...state.modal,
             [modalID]: {
                 ...state.modal[modalID],
                 [inputID]: textData,//Storage.getLessonByDoubleID(numData).name,
                 [inputID + 'Num']: numData,
-                [inputID + 'Select']: {
-                     isOpen: false
-                },
                 [inputID + 'Err'] : ''
             },
         }
+    };
+
+    if (modalID === 'newHomeworkModal') {
+        const start = data.modal.newHomeworkModal.startModalNum;
+        const end = data.modal.newHomeworkModal.endModalNum;
+
+        if (start && end) {
+            const hw_start_module = Number(start.split('_')[0]);
+            const hw_end_module = Number(end.split('_')[0]);
+            const hw_start_lesson = Number(start.split('_')[1]);
+            const hw_end_lesson = Number(end.split('_')[1]);
+
+            if (hw_start_module > hw_end_module ||
+                (hw_start_module === hw_end_module && hw_start_lesson > hw_end_lesson)) {
+                data.modal.newHomeworkModal.startModalErr = 'Занятие сдачи выше задания выдачи';
+                data.modal.newHomeworkModal.endModalErr = 'Занятие выдачи меньше задания сдачи';
+            } else {
+                data.modal.newHomeworkModal.startModalErr = '';
+                data.modal.newHomeworkModal.endModalErr = '';
+            }
+        }
+    }
+
+    return {
+        ...data
     }
 }
 

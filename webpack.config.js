@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
-  mode: 'production', //mode: 'development','production'
+  mode: 'development', //mode: 'development','production'
   entry: {
     bundle: ['whatwg-fetch', path.join(__dirname, '/src/js/index.js')]
   },

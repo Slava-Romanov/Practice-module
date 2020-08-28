@@ -4,7 +4,7 @@ import actions from "../../actions/actions";
 import {Table} from "../table"
 
 
-const mapToProps = ({modal}) => ({modal});
+const mapToProps = ({modal, selectOpen}) => ({modal, selectOpen});
 
 class lineSelect extends Component {
     constructor(props) {
@@ -12,18 +12,18 @@ class lineSelect extends Component {
         this.inputID = props.inputID;
         this.selectID = props.inputID + 'Select';
         this.modalID = props.modalID;
+        this.notFill = props.notFill;
     }
 
     render(props) {
-        console.log(props.children);
-        const select = props.modal[this.modalID][this.selectID];
-        return select && select.isOpen && <Fragment>
-            <div className='selectWindow'>
+        //const select = props.modal[this.modalID][this.selectID];//select.isOpen
+        return props.selectOpen === this.selectID && <Fragment>
+            <div className='selectWindow' id={this.selectID}>
                 {
                     props.children.length !== 0? props.children.map((el) => (
                         <div className='element' onClick={() => this.props.chooseSelect(this.modalID, this.inputID, el.num, el.name)}>
                             <div className='text'>
-                                {Table.fillSearch(el.name, props.modal[props.modalID][this.inputID])}
+                                {this.notFill? el.name:Table.fillSearch(el.name, props.modal[props.modalID][this.inputID])}
                             </div>
                         </div>
                     )):<div className='notFound'>Ничего не найдено</div>

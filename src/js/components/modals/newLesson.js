@@ -6,7 +6,7 @@ import closeModalIcon from "../../../images/closeModalIcon.svg";
 import LineSelect from "../elements/lineSelect";
 import Storage from "../../utils/data";
 
-const mapToProps = ({modal}) => ({modal});
+const mapToProps = ({modal, selectOpen}) => ({modal, selectOpen});
 
 class NewLessonModal extends Component {
     constructor(props) {
@@ -31,33 +31,45 @@ class NewLessonModal extends Component {
         return modal.isOpen && <div className='modal'>
             <div className='background' onClick={() => this.props.closeModal('newLessonModal')}>
             </div>
-            <div className='window'>
+            <div className='window' onMouseUp={(e) => this.props.clickOutNewLessonModal(e)}>
                 <div className='close' onClick={(e) => this.props.closeModal('newLessonModal')}>
                     <img src={closeModalIcon}/>
                 </div>
                 <div className='title'>
                     {this.title}
                 </div>
-                <input type='text' className='line' id='nameModal' onInput={e => this.props.onInputNewLessonModal(e)} required
-                           placeholder='Название занятия'
-                           value={modal.nameModal}>
-                </input>
-                {modal.textErrName ? <div className='err'>{modal.textErrName}</div> : ''}
-                <div className='blockLine' id='typeModalLine'>
-                    <input type='text' className='line' id='typeModal'
+
+                <div className='inputElement'>
+                    <input type='text' id='nameModal' className={`line inputFocus inputPlaceholder
+                        ${modal.nameModalErr ? ' errorLine' : ''}`}
+                           onfocusout={e => this.props.onInputNewLessonModal(e)}
+                           onInput={e => this.props.onInputNewLessonModal(e)} required
+                           placeholder='Название занятия' value={modal.nameModal}/>
+                    <label>Название занятия</label>
+                    {modal.nameModalErr ? <div className='err'>{modal.nameModalErr}</div> : ''}
+                </div>
+
+                <div className='inputElement' id='typeModalLine'>
+                    <input type='text' id='typeModal' className={`line inputPlaceholder
+                        ${this.props.selectOpen === 'typeModalSelect'? ' selectedLine' : ''}
+                        ${modal.typeModalErr ? ' errorLine' : ''}`}
                            onfocusin={e => this.props.onInputSelectModal(e, this.modalID)}
                            onInput={e => this.props.onInputSelectModal(e, this.modalID)} required
                            placeholder='Тип занятия' value={modal.typeModal} readonly/>
-                    <LineSelect inputID='typeModal' modalID={this.modalID} children={Storage.getTypesNums()}/>
+                    <label>Тип занятия</label>
+                    <LineSelect inputID='typeModal' modalID={this.modalID} notFill='false' children={Storage.getTypesNums()}/>
+                    {modal.typeModalErr ? <div className='err'>{modal.typeModalErr}</div> : ''}
                 </div>
-                {modal.textErrType ? <div className='err'>{modal.textErrType}</div> : ''}
-                <textarea id="descModal" className="line_area" onInput={e => this.props.onInputNewLessonModal(e)} value={modal.descModal}
+
+                <div className='inputElement'>
+                    <textarea id="descModal" className="line_area inputFocus inputPlaceholder"
+                          onInput={e => this.props.onInputNewLessonModal(e)} value={modal.descModal}
                           placeholder="Описание занятия (необязательно)" maxLength="512" rows="14" cols="33"/>
-                <a>
-                    <input type='submit' className='standard_btn blue_bg'
-                           value={this.btn} onClick={e => this.props.addLesson(e, modal.num)}>
-                    </input>
-                </a>
+                    <label>Описание занятия</label>
+                </div>
+
+                <input type='submit' className='standard_btn blue_bg'
+                       value={this.btn} onClick={e => this.props.addLesson(e, modal.num)}/>
             </div>
         </div>;
     }

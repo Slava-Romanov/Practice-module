@@ -36,7 +36,10 @@
     text-align: center
     z-index: 3
 
-.modal .window .line, .modal .window .line_area, .modal .window .standard_btn, .modal .window a
+.modal .window .line, .modal .window .line_area
+    width: 100%
+
+.modal .window .standard_btn
     width: 100%
     max-width: 300px
 
@@ -70,6 +73,9 @@
 
 .modal .choice .standard_btn:first-child
     margin-right: 10px
+    color: #1021f9
+    background: #ffffff
+    border: 1px solid #1021f9
 
 .modal .choice .standard_btn
     display: inline-block
@@ -90,9 +96,9 @@
     opacity: 1
 
 .modal .window .err
-    width: 282px
+    width: 284px
     //width: 300px
-    margin: -6px auto -6px auto
+    margin: -5px auto -1px auto
 
     text-align: left
     color: red

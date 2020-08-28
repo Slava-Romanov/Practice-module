@@ -18,7 +18,6 @@ input[type="text"]
 
 @mixin line-properties
     position: relative
-    width: 300px
     margin: 5px 0
     padding: 10px 7px
 
@@ -36,21 +35,58 @@ input[type="text"]
 input:focus
     outline: none
 
+.modal .window .inputFocus:focus::placeholder
+    opacity: 0
+    transition: opacity 0.3s ease
+
+.inputElement
+    position: relative
+    width: 100%
+    max-width: 300px
+    margin: auto
+
+.inputElement label
+    //display: none
+    position: absolute
+    top: 0
+    left: 1px + 7px - 3px
+    padding: 0 3px
+    white-space: nowrap
+    font-size: 10px
+    background: white
+    opacity: 0
+    transition: opacity 0.3s ease
+
+.inputElement .inputFocus:focus ~ label
+    //display: block
+    opacity: 1
+
+.inputElement .inputPlaceholder:not(:placeholder-shown) ~ label
+    opacity: 1
+
+input[type="text"].line, select.line, textarea.line_area, div.line
+    border: 1px solid rgba(0, 0, 0, 0.2)
+
 .line:hover, .line_area:hover, input[type="text"].line:hover
     border-color: rgba(16, 33, 249, 0.4)
 
 .line:focus, .line_area:focus, input[type="text"].line:focus
     border-color: rgba(16, 33, 249, 0.8)
 
-.modal .window .line:focus::placeholder, .modal .window .line_area:focus::placeholder
-    opacity: 0
-    transition: opacity 0.3s ease
+input[type=text].errorLine
+    border-color: rgba(249, 8, 23, 0.4)
 
-input[type="text"].line, select.line, textarea.line_area, div.line
-    border: 1px solid rgba(0, 0, 0, 0.2)
+input[type=text].selectedLine
+    border-color: rgba(16, 33, 249, 0.8)
 //.line
 //    height: 40px
 //    @include line-properties
+
+input[type="text"]:read-only.line
+    cursor: pointer
+
+input[type="text"]:read-only.selectedLine
+    cursor: default
 
 .line, .line_area
     @include line-properties
@@ -65,12 +101,7 @@ textarea.line_area
     appearance: none
     outline: none
 
-.blockLine
-    width: 300px
-    margin: auto
-    position: relative
-
-.blockLine .selectWindow
+.inputElement .selectWindow
     position: absolute
     left: 0
     top: 34px
@@ -94,17 +125,17 @@ textarea.line_area
     transform-origin: top left
     animation: openAnimation 0.3s 1 ease-out
 
-.blockLine .selectWindow .element
+.inputElement .selectWindow .element
     margin: 0 3px
     cursor: pointer
     animation: visibleAnimation 0.8s 1 ease-out
 
-.blockLine .selectWindow .notFound
+.inputElement .selectWindow .notFound
     margin: 0 auto
     padding: 10px 0
     width: 284px
 
-.blockLine .selectWindow .element .text
+.inputElement .selectWindow .element .text
     text-align: left
     text-overflow: ellipsis
     white-space: nowrap
@@ -115,10 +146,8 @@ textarea.line_area
     border-radius: 4px
     //border-top: 1px solid $color-line-border
 
-.blockLine .selectWindow .element .text:hover
+.inputElement .selectWindow .element .text:hover
     background: $color-grey-light
-
-
 
 //.blockLine .selectWindow .element:hover, .blockLine .selectWindow .element:active
 //    background: $color-grey-light
