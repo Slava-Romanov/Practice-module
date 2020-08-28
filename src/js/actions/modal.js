@@ -260,7 +260,8 @@ export function newLessonModal(state, num = null) {
 
     if (num != null) {
         data.modal.newLessonModal.nameModal = Storage.getLessonByID(state.page.moduleID, num).name;
-        data.modal.newLessonModal.typeModal = Storage.getLessonByID(state.page.moduleID, num).type;
+        data.modal.newLessonModal.typeModal = Storage.typesHomeworkNames[Storage.getLessonByID(state.page.moduleID, num).type];
+        data.modal.newLessonModal.typeModalNum = Storage.getLessonByID(state.page.moduleID, num).type;
         data.modal.newLessonModal.descModal = Storage.getLessonByID(state.page.moduleID, num).description;
     }
 
@@ -427,12 +428,21 @@ export function addLesson(state, num = null) {
             Storage.editLessonByID(name, type, desc, state.page.moduleID, num);
         }
 
+        let table = {};
+
+        if (state.page.moduleID && !state.page.lessonID) {
+            table = {
+                tableData: {
+                    ...state.tableData,
+                    elements: Storage.generateSelection('lessons', state.searchText, state.page),
+                    allChecked: false
+                }
+            };
+        }
+
+
         return {
-            tableData: {
-                ...state.tableData,
-                elements: Storage.generateSelection('lessons', state.searchText, state.page),
-                allChecked: false
-            },
+            ...table,
             modal: {
                 ...dataModal,
                 ...(num === null ? createInfoModal('Занятие успешно создано') : createInfoModal('Занятие успешно изменено')),
