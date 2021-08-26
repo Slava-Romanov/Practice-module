@@ -1,0 +1,21 @@
+@import 'styles/index.sass';
+
+@import 'styles/fonts.sass';
+@import 'styles/animations.sass';
+@import 'styles/buttons.sass';
+@import 'styles/input.sass';
+
+@import 'styles/page.sass';
+@import 'styles/modal.sass';
+
+@import 'styles/search.sass';
+@import 'styles/edit_panel.sass';
+
+@import 'styles/modules.sass';
+@import 'styles/lessons.sass';
+@import 'styles/marks.sass';
+@import 'styles/table.sass';
+@import 'styles/color_elements.sass';
+@import 'styles/top.sass';
+
+@import 'styles/error.sass';

@@ -1,0 +1,89 @@
+.table_parent
+    text-align: center
+
+.table
+    margin: auto
+    display: inline-block
+
+table[name='marks']
+    width: 600px
+
+.table .title-table
+    text-align: left
+
+.table .search
+    margin: 5px 0
+    box-shadow: none
+
+
+table[name='marks'] th:nth-child(-n+2)
+    width: 35px
+
+table[name='marks'] th:nth-child(1):not([disabled])
+    cursor: pointer
+
+table[name='marks'] td:nth-child(1)
+    cursor: pointer
+
+table[name='marks'] th:nth-child(3)
+    width: 250px
+
+table[name='marks'] td:nth-child(3)
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+table[name='marks'] th:nth-child(4)
+    width: 100px
+
+table[name='marks'] th:nth-child(5)
+    width: 20px
+
+table[name='marks'] td:nth-child(5)
+    cursor: pointer
+    opacity: 0.7
+
+table[name='marks'] td:nth-child(5):hover
+    opacity: 1
+
+@media (max-width: 600px)
+    table[name='marks']
+        width: 100%
+
+    table[name='marks'] th:nth-child(1)
+        width: 10px
+
+    table[name='marks'] th:nth-child(2)
+        width: 10px
+
+    table[name='marks'] th:nth-child(3)
+        width: 150px
+
+    table[name='marks'] th:nth-child(5), table[name='marks'] th:nth-child(6)
+        width: 10px
+
+@media (max-width: 450px)
+    .table
+        width: 100%
+
+    table[name='marks'] th:nth-child(-n+5)
+        font-size: 10px
+
+    table[name='marks'] td:nth-child(-n+5)
+        font-size: 10px
+
+    table[name='marks']
+        width: 100%
+
+    table[name='marks'] th:nth-child(3)
+        width: auto
+
+    table[name='marks'] th:nth-child(4)
+        width: 50px
+
+    table[name='marks'] .lec, table[name='marks'] .sem, table[name='marks']  .rk,
+    table[name='marks'] .ex, table[name='marks'] .hw_s, table[name='marks'] .hw_e
+        padding: 2px 5px
+        border-radius: 7px
+
+        font-size: 10px

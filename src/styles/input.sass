@@ -1,0 +1,188 @@
+@import 'variables'
+
+input[type="submit"]
+    appearance: none
+
+input[type="text"]
+    flex: 1 0 auto
+    width: auto
+    height: 100%
+
+    font-size: 13px
+    font-weight: 500
+
+    border: none
+    background: none
+
+    appearance: none
+
+@mixin line-properties
+    position: relative
+    margin: 5px 0
+    padding: 10px 7px
+
+    border-radius: 6px
+    font-size: 13px
+    font-weight: 500
+
+    background: $color-line-area
+    text-align: left
+
+    box-sizing: border-box
+    transition: border-color 0.3s ease
+    //box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05)
+
+input:focus
+    outline: none
+
+.modal .window .inputFocus:focus::placeholder
+    opacity: 0
+    transition: opacity 0.3s ease
+
+.inputElement
+    position: relative
+    width: 100%
+    max-width: 300px
+    margin: auto
+
+.inputElement label
+    //display: none
+    position: absolute
+    top: 0
+    left: 1px + 7px - 3px
+    padding: 0 3px
+    white-space: nowrap
+    font-size: 10px
+    background: white
+    opacity: 0
+    transition: opacity 0.3s ease
+
+.inputElement .inputFocus:focus ~ label
+    //display: block
+    opacity: 1
+
+.inputElement .inputPlaceholder:not(:placeholder-shown) ~ label
+    opacity: 1
+
+input[type="text"].line, select.line, textarea.line_area, div.line
+    border: 1px solid rgba(0, 0, 0, 0.2)
+
+.line:hover, .line_area:hover, input[type="text"].line:hover
+    border-color: rgba(16, 33, 249, 0.4)
+
+.line:focus, .line_area:focus, input[type="text"].line:focus
+    border-color: rgba(16, 33, 249, 0.8)
+
+input[type=text].errorLine
+    border-color: rgba(249, 8, 23, 0.4)
+
+input[type=text].selectedLine
+    border-color: rgba(16, 33, 249, 0.8)
+//.line
+//    height: 40px
+//    @include line-properties
+
+input[type="text"]:read-only.line
+    cursor: pointer
+
+input[type="text"]:read-only.selectedLine
+    cursor: default
+
+.line, .line_area
+    @include line-properties
+
+textarea.line_area
+    outline: none
+    resize: none
+    //font-family: inherit
+
+.modal .window select
+    @include line-properties
+    appearance: none
+    outline: none
+
+.inputElement .selectWindow
+    position: absolute
+    left: 0
+    top: 34px
+
+    width: 300px
+    max-height: 195px
+    padding: 4px 0
+
+    font-size: 12px
+    background: $color-white
+
+    border: 1px solid rgba(16, 33, 249, 0.8)
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2)
+    border-top: none
+    box-sizing: border-box
+    overflow: scroll
+    -webkit-overflow-scrolling: touch
+
+    z-index: 2
+    border-radius: 0 0 6px 6px
+    transform-origin: top left
+    animation: openAnimation 0.3s 1 ease-out
+
+.inputElement .selectWindow .element
+    margin: 0 3px
+    cursor: pointer
+    animation: visibleAnimation 0.8s 1 ease-out
+
+.inputElement .selectWindow .notFound
+    margin: 0 auto
+    padding: 10px 0
+    width: 284px
+
+.inputElement .selectWindow .element .text
+    text-align: left
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+    margin: auto
+    padding: 10px 5px
+    border-radius: 4px
+    //border-top: 1px solid $color-line-border
+
+.inputElement .selectWindow .element .text:hover
+    background: $color-grey-light
+
+//.blockLine .selectWindow .element:hover, .blockLine .selectWindow .element:active
+//    background: $color-grey-light
+
+//.line input[type="text"]
+//    height: 100%
+//    width: 95%
+//
+//    border: none
+//    background: none
+//
+//    font-size: 13px
+//    font-weight: 600
+//    appearance: none
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none)
+    input[type='checkbox']
+        appearance: none
+        height: 21px
+        width: 21px
+        position: relative
+        margin: 0
+        cursor: pointer
+        border: 1px solid $color-checkbox-border
+        background: $color-checkbox-area
+        border-radius: 3px
+        transition: background .3s, border-color .3s
+
+    input[type='checkbox']:checked
+        background: $color-checkbox-area-checked
+        border: 1px solid $color-checkbox-border-checked
+
+    input[type='checkbox']:disabled
+        cursor: not-allowed
+        opacity: .5
+
+    input[type='checkbox']:hover:not(:disabled)
+        border: 1px solid $color-checkbox-border-hover

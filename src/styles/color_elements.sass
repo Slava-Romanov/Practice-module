@@ -1,0 +1,66 @@
+@import 'variables'
+
+.note
+    display: inline-block
+    margin: 0 10px
+.note:first-child
+    margin-left: 0
+
+.note:last-child
+    margin-right: 0
+
+.note .light-blue
+    display: inline-block
+    width: 30px
+    height: 7px
+    background: $color-hw_s
+    border-radius: 7px
+
+.note .blue
+    display: inline-block
+    width: 30px
+    height: 7px
+    background: $color-hw_e
+    border-radius: 7px
+
+.notes
+    font-size: 12px
+    color: $color-notes
+    font-style: italic
+
+.lec
+    background: $color-lec
+
+.sem
+    background: $color-sem
+
+.rk
+    background: $color-rk
+
+.ex
+    background: $color-ex
+
+.hw_s
+    background: $color-hw_s
+
+.hw_e
+     background: $color-hw_e
+
+.lec, .sem, .rk, .ex, .hw_s, .hw_e
+    padding: 2px 10px
+    border-radius: 7px
+
+    font-size: 14px
+    color: $color-text-component
+
+    white-space: nowrap
+    overflow: hidden
+    margin: auto
+
+    text-overflow: ellipsis
+    max-width: 300px
+    box-sizing: border-box
+
+.hw
+    display: inline-block
+    margin: 4px 4px 4px 0
